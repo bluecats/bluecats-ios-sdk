@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   }
   s.summary  = 'BlueCatsSDK for micro-location.'
   s.homepage = 'http://www.bluecats.com'
-  s.author   = { 'BlueCats' => 'theteam@bluecats.com' }
+  s.authors   = { 'BlueCats' => 'theteam@bluecats.com' }
   s.source   = { :git => 'https://github.com/csingleton/bluecats-ios-sdk.git', :tag => '0.0.1' }
   s.platform = :ios, '6.0'
   s.source_files = '*.h'
