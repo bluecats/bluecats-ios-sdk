@@ -8,6 +8,12 @@
 
 #import "BCBeaconDataSource.h"
 
+typedef enum {
+    BCSiteStateUnknown = 0,
+    BCSiteStateInside,
+    BCSiteStateOutside,
+} BCSiteState;
+
 @class CLLocation, BCAddress, BCSiteAccessType, BCSiteType;
 
 @protocol BCSiteDelegate;

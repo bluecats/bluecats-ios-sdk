@@ -7,11 +7,11 @@
 //
 
 #import <CoreLocation/CoreLocation.h>
-#import "BCSiteActivityMonitor.h"
+#import "BCSite.h"
 
 @protocol BCMicroLocationManagerDelegate;
 
-@class BCMicroLocation, BCSite;
+@class BCMicroLocation;
 
 @interface BCMicroLocationManager : NSObject
 
