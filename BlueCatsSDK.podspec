@@ -14,21 +14,21 @@ Pod::Spec.new do |s|
   s.summary  = 'BlueCatsSDK for micro-location.'
   s.homepage = 'http://www.bluecats.com'
   s.authors   = { 'BlueCats' => 'theteam@bluecats.com' }
-  s.source   = { :git => 'https://github.com/csingleton/bluecats-ios-sdk.git', :tag => '0.0.1' }
-  s.platform = :ios, '6.0'
-  s.source_files = '*.h'
+  s.source   = { :git => 'https://github.com/csingleton/bluecats-ios-sdk.git', :tag => '0.1.0' }
+  s.platform = :ios, '7.0'
+  s.source_files = 'Headers/*.h'
   s.preserve_paths = 'libBlueCatsSDK.a'
   s.library = 'BlueCatsSDK'
   
   s.requires_arc = true
-  s.ios.deployment_target = '6.0'
+  s.ios.deployment_target = '7.0'
   s.frameworks = 'SystemConfiguration', 'CoreBluetooth', 'MobileCoreServices', 'CoreGraphics', 'CoreLocation', 'AdSupport'
   
   s.xcconfig  =  { 'LIBRARY_SEARCH_PATHS' => '"$(PODS_ROOT)/BlueCatsSDK/"' }
 
-  s.ios.dependency 'RestKit', '~> 0.20.0'
-  s.ios.dependency 'CocoaLumberjack', '~> 1.6.2'
-  s.ios.dependency 'MulticastDelegate', '~> 0.0.1'
+  s.ios.dependency 'RestKit', '~> 0.22.0'
+  s.ios.dependency 'CocoaLumberjack', '~> 1.6.4'
+  s.ios.dependency 'MulticastDelegate', '~> 0.0.1.1'
 
   s.prefix_header_contents = <<-EOS
 #import <Availability.h>
