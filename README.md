@@ -10,7 +10,7 @@ We recommend installing BlueCats with CocoaPods. CocoaPods is an Objective-C lib
 Add a BlueCatsSDK dependency to your Podfile in your Xcode project directory:
 
 ```ruby
-platform :ios 6.0
+platform :ios 7.0
 pod 'BlueCatsSDK', :git => 'https://github.com/bluecats/bluecats-ios-sdk.git'
 ```
 
@@ -31,9 +31,8 @@ $ pod update
 ``` objective-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [BlueCatsSDK setOptions:@{BCOptionUseStageApi: @"YES"}];
     [BlueCatsSDK startPurringWithAppToken:@"YourBCAppToken"];
-    [[BCMicroLocationManager sharedManager] startUpdatingMicroLocation];
+    [[BCMicroLocationManager sharedManager] startUpdatingMicroLocation]; 
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
@@ -41,6 +40,31 @@ $ pod update
     self.window.rootViewController = onlyViewController;
     [self.window makeKeyAndVisible];
     return YES;
+}
+```
+If you don't like a shared micro-location manager, then init your very own BCMicroLocationManager. 
+
+``` objective-c
+- (BCMicroLocationManager *)microLocationManager
+{
+    if (!_microLocationManager) {
+        _microLocationManager = [[BCMicroLocationManager alloc] init];
+    }
+    return _microLocationManager;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.microLocationManager.delegate = self;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    _microLocationManager = nil;
 }
 ```
 
@@ -87,3 +111,93 @@ $ pod update
     BCMicroLocation *microLocation = [notification.userInfo objectForKey:BCMicroLocationManagerNotificationNewLocationItem];
 }
 ```
+
+
+### Implement BCMicroLocationManagerDelegate methods
+``` objective-c
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger didUpdateNearbySites:(NSArray *)sites
+{
+    [self refreshNearbySites];
+}
+
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger didEnterSite:(BCSite *)site
+{
+    [self determinedState:BCSiteStateInside forSite:site];
+}
+
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger didExitSite:(BCSite *)site
+{
+    [self determinedState:BCSiteStateOutside forSite:site];
+}
+
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger didDetermineState:(BCSiteState)state forSite:(BCSite *)site
+{
+    [self determinedState:state forSite:site];
+}
+```
+
+
+### Get Categories and Beacons for Your Site by Proximity
+``` objective-c
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger didUpdateMicroLocations:(NSArray *)microLocations
+{
+    BCMicroLocation *microLocation = [microLocations lastObject];
+    
+    NSArray *categories = [microLocation categoriesForSite:self.site proximity:BCProximityNear];
+
+    NSArray *beacons = [microLocation beaconsForSite:self.site proximity:BCProximityImmediate];
+}
+```
+
+### Get Nearby Sites
+``` objective-c
+- (void)requestStateForNearbySites
+{
+    NSOrderedSet *nearbySites = self.microLocationManager.nearbySites;
+    
+    for (BCSite *site in nearbySites) {
+        [self.microLocationManager requestStateForSite:site];
+    }
+}
+
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger didDetermineState:(BCSiteState)state forSite:(BCSite *)site
+{
+    [self determinedState:state forSite:site];
+}
+```
+
+### Schedule a Local Notification to Fire in a Site and categories
+``` objective-c
+- (IBAction)save:(id)sender
+{
+    [self.tableView endEditing:YES];
+    
+    BCLocalNotification* localNotification = [[BCLocalNotification alloc] init];
+    localNotification.fireAfter = self.fireAfter;
+    localNotification.alertBody = self.alertBody;
+    localNotification.alertAction = self.alertAction;
+    localNotification.fireInSite = self.site;
+    localNotification.fireInCategories = self.fireInCategories;
+    localNotification.fireInProximity = self.fireInProximity;
+    
+    [[BCLocalNotificationManager sharedManager] scheduleLocalNotification:localNotification];
+    
+    [self.delegate localNotificationViewControllerDelegate:self didSaveLocalNotification:localNotification];
+}
+```
+
+
+ 
+### Monitor Sites and Range Beacons
+``` objective-c
+ 
+ self.microLocationManager startRangingBeaconsInSite:self.site];
+ 
+ - (void)microLocationManager:(BCMicroLocationManager *)microLocationManger didRangeBeacons:(NSArray *)beacons inSite:(BCSite *)site
+{
+    [self addAnnotationsForBeacons:beacons];
+    
+    [self updateAnnotationViewsWithBeacons:beacons];
+}
+
+ ```
