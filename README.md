@@ -1,7 +1,7 @@
 BlueCats SDK for iOS7
 ================
 
-Need some beacons? Request a starter pack from [www.bluecats.com](http://www.bluecats.com/starterpack). Will ship you 3 beacons in a neat box along with a code that will give access to our platform.
+Need some beacons? Request a starter pack from [www.bluecats.com](http://www.bluecats.com/starterpack). Will ship you 3 beacons in a neat box along with a code that will give you access to our platform.
 
 
 
