@@ -1,7 +1,9 @@
-bluecats-ios-sdk
+BlueCats SDK for iOS7
 ================
 
-Request a BCAppToken from theteam@bluecats.com.
+Need some beacons? Request a starter pack from [www.bluecats.com](http://www.bluecats.com/starterpack). Will ship you 3 beacons in a neat box along with a code that will give access to our platform.
+
+
 
 ## Getting Started
  
@@ -24,6 +26,18 @@ If you need to update the installed BlueCatsSDK dependency in your project:
 ```
 $ pod update
 ```
+
+## What the ...?
+
+####BCSite
+
+A BCSite object represents a group of beacons. A site is any place or building that has a physical address or coordinate. In some buildings such as malls there can be sites within a site. With our managment app you can control which apps access your sites and its beacons. Our BCSite gives context to Apple's CLBeaconRegion.    
+####BCBeacon
+
+A BCBeacon object represents a beacon device. Beacon devices are uniquely identified by their composite key (ProximityUUID:Major:Minor). Characterisitics such as beacon loudness and target speed can be changed to customize behaviours for your use case. In addition, you can use our management apps to assign categories such as text, hashtags, or urls to a beacon. The SDK eagerly syncs and caches beacons from nearby sites for your app. Our BCBeacon gives context to Apple's CLBeacon.  
+####BCMicroLocation
+
+A BCMicroLocation object represents the sites and beacons in proximity to the user. When your app needs some context it can query a micro-location for a sites beacons and categories by proximity. Its all the beacon goodness wrapped up into a tiny object. And integrating micro-locations with your app is simple. Either observe micro-location did update notification or become a delegate of our BCMicroLocationManager and implement the equivalent method.
 
 ## Examples
 
@@ -137,7 +151,7 @@ If you don't like a shared micro-location manager, then init your very own BCMic
 ```
 
 
-### Get Categories and Beacons for Your Site by Proximity
+### Get Some Context for Your Next App Action
 ``` objective-c
 - (void)microLocationManager:(BCMicroLocationManager *)microLocationManger didUpdateMicroLocations:(NSArray *)microLocations
 {
