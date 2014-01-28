@@ -7,6 +7,7 @@
 //
 
 #import "BCBeaconDataSource.h"
+#import "BCCategoryDataSource.h"
 
 typedef enum {
     BCSiteStateUnknown = 0,
@@ -16,18 +17,15 @@ typedef enum {
 
 @class CLLocation, BCAddress, BCSiteAccessType, BCSiteType;
 
-@protocol BCSiteDelegate;
+@interface BCSite : NSObject <NSCopying, BCBeaconDataSource, BCCategoryDataSource>
 
-@interface BCSite : NSObject <NSCopying, BCBeaconDataSource>
-
-@property (nonatomic, assign) NSObject<BCSiteDelegate> *delegate;
 @property (nonatomic, copy) NSString *teamID;
 @property (nonatomic, assign) NSInteger beaconCount;
 @property (nonatomic, strong) BCSiteAccessType *siteAccessType;
-@property (nonatomic, strong) BCSiteType *siteType;
 @property (nonatomic, copy) NSDate *createdAt;
 
 @property (nonatomic, copy) NSDate *syncedAt;
+@property (nonatomic, assign, readonly) BOOL synced;
 @property (nonatomic, copy) NSDate *cachedAt;
 
 - (void)copyApiPropertiesFromSite:(BCSite *)site;
@@ -43,9 +41,9 @@ typedef enum {
 
 - (BOOL)hasCategoriesCacheExpired;
 
-- (void)loadCategoriesWithSuccess:(void (^)(BCSite *, NSArray *))success
-                          failure:(void (^)(BCSite *, NSError *))failure
-                     preferCached:(BOOL)preferCached;
+- (void)getCategoriesWithSuccess:(void (^)(NSArray *))success
+                         failure:(void (^)(NSError *))failure
+                    preferCached:(BOOL)preferCached;
 
 - (CLLocation *)location;
 
@@ -53,16 +51,8 @@ typedef enum {
 
 - (NSArray *)cachedBeacons;
 - (BOOL)hasBeaconsCacheExpired;
-- (void)loadBeaconsWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure preferCached:(BOOL)preferCached;
-
-- (BOOL)synced;
-
-@end
-
-
-@protocol BCSiteDelegate <NSObject>
-
-@optional
-- (void)siteDidUpdateApiProperties:(BCSite*)site;
+- (void)getBeaconsWithSuccess:(void (^)(NSArray *))success
+                      failure:(void (^)(NSError *))failure
+                 preferCached:(BOOL)preferCached;
 
 @end

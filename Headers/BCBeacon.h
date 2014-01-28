@@ -6,22 +6,29 @@
 //  Copyright (c) 2013 Bluecats. All rights reserved.
 //
 
-#import <CoreBluetooth/CoreBluetooth.h>
-#import <CoreLocation/CoreLocation.h>
-
 typedef enum {
-	BCProximityUnknown,
+	BCProximityUnknown = 0,
 	BCProximityImmediate,
 	BCProximityNear,
 	BCProximityFar
 } BCProximity;
 
-@class BCBatteryStatus, BCBeaconLoudness, BCTargetSpeed, BCBeaconRSSILog, BCMapPoint;
+typedef enum {
+    BCBeaconModeUnknown = 0,
+    BCBeaconModeSpecialNeeds = 1,
+    BCBeaconModeSphynx = 2,
+    BCBeaconModeBengal = 3
+} BCBeaconMode;
 
-@protocol BCBeaconDelegate;
+typedef enum {
+    BCAvailabilityStatusNotDetermined = 0,
+    BCAvailabilityStatusNotAvailable,
+    BCAvailabilityStatusAvailable
+} BCAvailabilityStatus;
 
-@interface BCBeacon : NSObject
+@class BCBatteryStatus, BCBeaconLoudness, BCTargetSpeed, BCMapPoint, CBPeripheral;
 
+@interface BCBeacon : NSObject <NSCopying>
 
 // BlueCats Api properties
 @property (nonatomic, copy) NSString *beaconID;
@@ -30,21 +37,22 @@ typedef enum {
 @property (nonatomic, copy) NSString *teamID;
 @property (nonatomic, copy) NSString *siteID;
 @property (nonatomic, copy) NSString *siteName;
-@property (nonatomic, strong) NSDate *createdAt;
-@property (nonatomic, strong) BCBatteryStatus *batteryStatus;
-@property (nonatomic, strong) BCBeaconLoudness *beaconLoudness;
-@property (nonatomic, strong) BCTargetSpeed *targetSpeed;
-@property (nonatomic, copy) NSArray *categories;
-@property (nonatomic, strong) BCMapPoint *mapPoint;
+@property (nonatomic, copy) NSString *bluetoothAddress;
+@property (nonatomic, copy) NSDate *createdAt;
 
-// Core bluetooth properties
+@property (nonatomic, copy) BCBatteryStatus *batteryStatus;
+@property (nonatomic, copy) BCBeaconLoudness *beaconLoudness;
+@property (nonatomic, copy) BCTargetSpeed *targetSpeed;
+@property (nonatomic, copy) BCMapPoint *mapPoint;
+
+@property (nonatomic, copy) NSArray *categories;
+
+// CoreBluetooth properties
 @property (nonatomic, strong) CBPeripheral *peripheral;
-@property (nonatomic, copy) NSNumber *smoothedRSSI;
-@property (nonatomic, copy) NSNumber *batteryLevel;
-@property (nonatomic, copy) NSNumber *txPowerLevel;
 @property (nonatomic, copy) NSDate *firstDiscoveredAt;
 @property (nonatomic, copy) NSDate *lastDiscoveredAt;
-@property (nonatomic, copy) NSMutableArray *beaconRSSILogs;
+@property (nonatomic, assign, readonly) BOOL discovered;
+@property (nonatomic, copy) NSDictionary *blueCatsAdvertisementData;
 
 // iBeacon properties
 @property (nonatomic, copy) NSString *proximityUUIDString;
@@ -54,33 +62,40 @@ typedef enum {
 @property (nonatomic, copy) NSNumber *rssi;
 @property (nonatomic, assign) BCProximity proximity;
 
-// BCBeaconManager properties
+// BeaconManager properties
 @property (nonatomic, copy) NSDate *cachedAt;
-@property (nonatomic, copy, readonly) NSDate *syncedAt;
+@property (nonatomic, copy) NSDate *syncedAt;
+@property (nonatomic, assign, readonly) BOOL synced;
 @property (nonatomic, copy, readonly) NSString *compositeKey;
+
+- (BOOL)needsBehaviourUpdate;
+@property (nonatomic, assign, readonly) BCAvailabilityStatus behaviourUpdatingAvailabilityStatus;
+@property (nonatomic, assign, readonly) BCAvailabilityStatus modeSwitchingAvailabilityStatus;
+@property (nonatomic, assign, readonly) BCAvailabilityStatus opcodeControllingAvailabilityStatus;
 
 - (void)copyApiPropertiesFromBeacon:(BCBeacon *)beacon;
 
-- (BOOL)needsBeaconLoudnessUpdated;
-- (NSData *)beaconLoudnessLevelData;
-
-- (BOOL)discovered;
-- (BOOL)synced;
-
-- (void)addDelegate:(NSObject<BCBeaconDelegate> *)delegate;
-- (void)removeDelegate:(NSObject<BCBeaconDelegate> *)delegate;
-
 // Class methods
-+ (NSString *)compositeKeyForProximityUUIDString:(NSString *)proximityUUIDString major:(NSNumber *)major minor:(NSNumber *)minor;
++ (NSString *)compositeKeyForProximityUUIDString:(NSString *)proximityUUIDString
+                                           major:(NSNumber *)major
+                                           minor:(NSNumber *)minor;
 
 @end
 
+extern NSString * const BCAdvertisementDataModeKey;
+extern NSString * const BCAdvertisementDataProximityUUIDStringKey;
+extern NSString * const BCAdvertisementDataBluetoothAddressStringKey;
+extern NSString * const BCAdvertisementDataMajorKey;
+extern NSString * const BCAdvertisementDataMinorKey;
+extern NSString * const BCAdvertisementDataFirmwareVersionKey;
+extern NSString * const BCAdvertisementDataModelNumberKey;
+extern NSString * const BCAdvertisementDataBatteryLevelKey;
+extern NSString * const BCAdvertisementDataTxPowerLevelKey;
+extern NSString * const BCAdvertisementDataMeasuredPowerAtOneMeterKey;
+extern NSString * const BCAdvertisementDataBeaconLoudnessLevelKey;
+extern NSString * const BCAdvertisementDataTargetSpeedInMillisecondsKey;
 
-@protocol BCBeaconDelegate <NSObject>
+extern NSString * const BCFirmwareVersion002;
+extern NSString * const BCFirmwareVersion010;
+extern NSString * const BCFirmwareVersion011;
 
-@optional
-- (void)beaconDidUpdateRSSI:(BCBeacon*)beacon;
-- (void)beaconDidUpdateApiAttributes:(BCBeacon*)beacon;
-- (void)beacon:(BCBeacon*)beacon didLogRSSI:(BCBeaconRSSILog *)rssiLog;
-
-@end

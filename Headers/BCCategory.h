@@ -7,12 +7,12 @@
 //
 
 typedef enum BCCategoryType {
-    BCCategoryTypeNone = 0,
+    BCCategoryTypeUnknown = 0,
     BCCategoryTypeBlueCats = 1,
     BCCategoryTypeTeam = 2
 } BCCategoryType;
 
-@interface BCCategory : NSObject
+@interface BCCategory : NSObject <NSCopying>
 
 @property (nonatomic, copy) NSString *categoryID;
 @property (nonatomic, copy) NSString *name;

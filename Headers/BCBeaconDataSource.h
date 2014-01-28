@@ -16,8 +16,8 @@
 - (NSArray *)cachedBeacons;
 - (BOOL)hasBeaconsCacheExpired;
 
-- (void)loadBeaconsWithSuccess:(void (^)(NSArray *))success
-                       failure:(void (^)(NSError *))failure
-                  preferCached:(BOOL)preferCached;
+- (void)getBeaconsWithSuccess:(void (^)(NSArray *))success
+                      failure:(void (^)(NSError *))failure
+                 preferCached:(BOOL)preferCached;
 
 @end

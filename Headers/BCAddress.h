@@ -15,19 +15,24 @@
 @property (nonatomic, copy) NSString *streetLine2;
 @property (nonatomic, copy) NSString *cityName;
 @property (nonatomic, copy) NSString *stateAbbrev;
-@property (nonatomic, assign) NSInteger zipCode;
-@property (nonatomic, assign) NSInteger zipPlusFour;
+@property (nonatomic, copy) NSString *postalCode;
 @property (nonatomic, copy) NSString *countryName;
 @property (nonatomic, copy) NSNumber *latitude;
 @property (nonatomic, copy) NSNumber *longitude;
+@property (nonatomic, assign) BOOL useLatLong;
 
-+ (BCAddress *)addressWithStreetLine1:(NSString *)streetLine1 streetLine2:(NSString *)streetLine2 cityName:(NSString *)cityName stateAbbrev:(NSString *)stateAbbrev zipCode:(NSString *)zipCode countryName:(NSString *)countryName;
++ (BCAddress *)addressWithStreetLine1:(NSString *)streetLine1
+                          streetLine2:(NSString *)streetLine2
+                             cityName:(NSString *)cityName
+                          stateAbbrev:(NSString *)stateAbbrev
+                           postalCode:(NSString *)postalCode
+                          countryName:(NSString *)countryName;
 
-- (NSString *)formatAsCityNameCommaStateAbbrev;
+- (NSString *)cityNameAndStateAbbrevJoinedByComma;
+- (NSString *)latitudeAndLongitudeJoinedByComma;
+- (NSString *)componentsJoinedByComma;
 
-- (NSString *)formatAsSingleLine;
-
-- (BOOL)addressIsEmpty;
+- (BOOL)isAddressEmpty;
 
 - (CLLocation *)location;
 

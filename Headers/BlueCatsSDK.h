@@ -10,15 +10,13 @@
 
 + (void)setOptions:(NSDictionary*)options;
 
-+ (void)setAppToken:(NSString *)appToken;
-
 + (void)startPurring;
-
 + (void)startPurringWithAppToken:(NSString *)appToken;
 
 + (void)stopPurring;
 
-+ (void)makeYourMarkWithKey:(NSString *)key value:(NSString *)value;
++ (void)setAppToken:(NSString *)appToken;
++ (void)setCredentialsWithUserName:(NSString *)userName password:(NSString *)password;
 
 @end
 

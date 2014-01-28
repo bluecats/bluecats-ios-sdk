@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name     = 'BlueCatsSDK'
-  s.version  = '0.1.0'
+  s.version  = '0.1.1'
   s.license      = {
     :type => 'Commercial',
     :text => <<-LICENSE
-              All text and design is copyright © 2011-2013 Plus Location Systems, LLC.
+              All text and design is copyright © 2013-2014 BlueCats Australia Pty Ltd.
 
               All rights reserved.
 
