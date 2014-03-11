@@ -22,4 +22,6 @@
 
 extern NSString* const BCOptionUseStageApi;
 extern NSString* const BCOptionBeaconVisitTrackingEnabled;
+extern NSString* const BCOptionMonitorBlueCatsRegionOnStartup;
+extern NSString* const BCOptionMonitorAllAvailableRegionsOnStartup;
 

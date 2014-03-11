@@ -26,6 +26,12 @@ typedef enum {
     BCAvailabilityStatusAvailable
 } BCAvailabilityStatus;
 
+typedef enum {
+    BCSyncStatusNotSynced = 0,
+    BCSyncStatusWillNotSync,
+    BCSyncStatusSynced
+} BCSyncStatus;
+
 @class BCBatteryStatus, BCBeaconLoudness, BCTargetSpeed, BCMapPoint, CBPeripheral;
 
 @interface BCBeacon : NSObject <NSCopying>
@@ -52,7 +58,7 @@ typedef enum {
 @property (nonatomic, copy) NSDate *firstDiscoveredAt;
 @property (nonatomic, copy) NSDate *lastDiscoveredAt;
 @property (nonatomic, assign, readonly) BOOL discovered;
-@property (nonatomic, copy) NSDictionary *blueCatsAdvertisementData;
+@property (nonatomic, copy) NSDictionary *advertisementData;
 
 // iBeacon properties
 @property (nonatomic, copy) NSString *proximityUUIDString;
@@ -65,6 +71,7 @@ typedef enum {
 // BeaconManager properties
 @property (nonatomic, copy) NSDate *cachedAt;
 @property (nonatomic, copy) NSDate *syncedAt;
+@property (nonatomic, assign) BCSyncStatus syncStatus;
 @property (nonatomic, assign, readonly) BOOL synced;
 @property (nonatomic, copy, readonly) NSString *compositeKey;
 
