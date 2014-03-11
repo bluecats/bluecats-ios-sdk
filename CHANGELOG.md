@@ -7,3 +7,6 @@
   - Added BlueCats Sample Application
   
 ### Version 0.0.1 (March 12, 2013)
+
+### Version 0.1.1 (March 12, 2014)
+  - Improved support for background scanning and notifications
