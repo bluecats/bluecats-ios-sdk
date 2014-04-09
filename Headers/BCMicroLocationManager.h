@@ -23,6 +23,8 @@
 @property (readonly, nonatomic) NSSet *monitoredSites;
 @property (readonly, nonatomic) NSSet *rangedSites;
 
+@property (nonatomic, assign) BOOL updateMicroLocationOnlyOnProximityChanges;
+
 @property (nonatomic, copy, readonly) BCMicroLocation *microLocation;
 
 - (void)startUpdatingMicroLocation;
@@ -106,7 +108,6 @@ rangingBeaconsDidFailForSite:(BCSite *)site
 
 extern NSString * const BCMicroLocationManagerDidEnterSite;
 extern NSString * const BCMicroLocationManagerDidExitSite;
-extern NSString * const BCMicroLocationManagerDidUpdateMicroLocation;
 extern NSString * const BCMicroLocationManagerDidUpdateNearbySites;
 extern NSString * const BCMicroLocationManagerDidUpdateMicroLocationServicesAvailibility;
 

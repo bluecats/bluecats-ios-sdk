@@ -15,24 +15,20 @@ typedef enum {
 
 typedef enum {
     BCBeaconModeUnknown = 0,
-    BCBeaconModeSpecialNeeds = 1,
-    BCBeaconModeSphynx = 2,
-    BCBeaconModeBengal = 3
+    BCBeaconModeSpecialNeeds,
+    BCBeaconModeSphynx,
+    BCBeaconModeBengal
 } BCBeaconMode;
-
-typedef enum {
-    BCAvailabilityStatusNotDetermined = 0,
-    BCAvailabilityStatusNotAvailable,
-    BCAvailabilityStatusAvailable
-} BCAvailabilityStatus;
 
 typedef enum {
     BCSyncStatusNotSynced = 0,
     BCSyncStatusWillNotSync,
-    BCSyncStatusSynced
+    BCSyncStatusSynced,
 } BCSyncStatus;
 
 @class BCBatteryStatus, BCBeaconLoudness, BCTargetSpeed, BCMapPoint, CBPeripheral;
+
+@protocol BCBeaconDelegate;
 
 @interface BCBeacon : NSObject <NSCopying>
 
@@ -44,6 +40,9 @@ typedef enum {
 @property (nonatomic, copy) NSString *siteID;
 @property (nonatomic, copy) NSString *siteName;
 @property (nonatomic, copy) NSString *bluetoothAddress;
+@property (nonatomic, copy) NSNumber *version;
+@property (nonatomic, copy) NSNumber *pendingVersion;
+@property (nonatomic, copy) NSNumber *measuredPowerAt1Meter;
 @property (nonatomic, copy) NSDate *createdAt;
 
 @property (nonatomic, copy) BCBatteryStatus *batteryStatus;
@@ -54,11 +53,11 @@ typedef enum {
 @property (nonatomic, copy) NSArray *categories;
 
 // CoreBluetooth properties
-@property (nonatomic, strong) CBPeripheral *peripheral;
+@property (nonatomic, copy) NSUUID *peripheralIdentifier;
 @property (nonatomic, copy) NSDate *firstDiscoveredAt;
 @property (nonatomic, copy) NSDate *lastDiscoveredAt;
 @property (nonatomic, assign, readonly) BOOL discovered;
-@property (nonatomic, copy) NSDictionary *advertisementData;
+@property (nonatomic, copy) NSDictionary *bcAdData;
 
 // iBeacon properties
 @property (nonatomic, copy) NSString *proximityUUIDString;
@@ -75,11 +74,6 @@ typedef enum {
 @property (nonatomic, assign, readonly) BOOL synced;
 @property (nonatomic, copy, readonly) NSString *compositeKey;
 
-- (BOOL)needsBehaviourUpdate;
-@property (nonatomic, assign, readonly) BCAvailabilityStatus behaviourUpdatingAvailabilityStatus;
-@property (nonatomic, assign, readonly) BCAvailabilityStatus modeSwitchingAvailabilityStatus;
-@property (nonatomic, assign, readonly) BCAvailabilityStatus opcodeControllingAvailabilityStatus;
-
 - (void)copyApiPropertiesFromBeacon:(BCBeacon *)beacon;
 
 // Class methods
@@ -89,6 +83,8 @@ typedef enum {
 
 @end
 
+extern NSString * const BCAdvertisementDataVersionKey;
+extern NSString * const BCAdvertisementDataAdTypeKey;
 extern NSString * const BCAdvertisementDataModeKey;
 extern NSString * const BCAdvertisementDataProximityUUIDStringKey;
 extern NSString * const BCAdvertisementDataBluetoothAddressStringKey;
@@ -98,11 +94,12 @@ extern NSString * const BCAdvertisementDataFirmwareVersionKey;
 extern NSString * const BCAdvertisementDataModelNumberKey;
 extern NSString * const BCAdvertisementDataBatteryLevelKey;
 extern NSString * const BCAdvertisementDataTxPowerLevelKey;
-extern NSString * const BCAdvertisementDataMeasuredPowerAtOneMeterKey;
+extern NSString * const BCAdvertisementDataMeasuredPowerAt1MeterKey;
 extern NSString * const BCAdvertisementDataBeaconLoudnessLevelKey;
 extern NSString * const BCAdvertisementDataTargetSpeedInMillisecondsKey;
 
 extern NSString * const BCFirmwareVersion002;
 extern NSString * const BCFirmwareVersion010;
 extern NSString * const BCFirmwareVersion011;
+extern NSString * const BCFirmwareVersion020;
 

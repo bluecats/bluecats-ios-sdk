@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy) NSString *mapPointID;
 @property (nonatomic, copy) NSString *mapID;
+@property (nonatomic, copy) NSString *mapName;
 @property (nonatomic, copy) BCPoint *point;
 @property (nonatomic, copy) NSDate *modifiedAt;
 

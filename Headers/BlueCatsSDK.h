@@ -20,8 +20,10 @@
 
 @end
 
-extern NSString* const BCOptionUseStageApi;
-extern NSString* const BCOptionBeaconVisitTrackingEnabled;
-extern NSString* const BCOptionMonitorBlueCatsRegionOnStartup;
-extern NSString* const BCOptionMonitorAllAvailableRegionsOnStartup;
+extern NSString * const BCOptionUseStageApi;
+extern NSString * const BCOptionTrackBeaconVisits;
+extern NSString * const BCOptionMonitorBlueCatsRegionOnStartup;
+extern NSString * const BCOptionMonitorAllAvailableRegionsOnStartup;
+extern NSString * const BCOptionUseAggressivePeripheralScanStrategy;
+extern NSString * const BCOptionCrowdSourceBeaconUpdates;
 
