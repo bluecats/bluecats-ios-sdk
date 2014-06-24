@@ -102,11 +102,6 @@ If you don't like a shared micro-location manager, then init your very own BCMic
                                              selector:@selector(microLocationManagerDidExitSiteNotification:)
                                                  name:BCMicroLocationManagerDidExitSite
                                                object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(microLocationManagerDidUpdateMicroLocationNotification:)
-                                                 name:BCMicroLocationManagerDidUpdateMicroLocation
-                                               object:nil];
 }
 ```
 
@@ -120,11 +115,6 @@ If you don't like a shared micro-location manager, then init your very own BCMic
 - (void)microLocationManagerDidExitSiteNotification:(NSNotification *)notification
 {
     BCSite *site = [notification.userInfo objectForKey:BCMicroLocationManagerNotificationSiteItem];
-}
-
-- (void)microLocationManagerDidUpdateMicroLocationNotification:(NSNotification *)notification
-{
-    BCMicroLocation *microLocation = [notification.userInfo objectForKey:BCMicroLocationManagerNotificationNewLocationItem];
 }
 ```
 
