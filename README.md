@@ -35,7 +35,7 @@ A BCSite object represents a group of beacons. A site is any place or building t
 
 ####BCBeacon
 
-A BCBeacon object represents a beacon device. Characterisitics such as beacon loudness and target speed can be changed to customize beacon behaviours for your use case. The SDK syncs and caches beacons from nearby sites for your app based on signigficant location change. This allows the presentation of outside beacon data quickly and relaiabily in areas of poor connectivity.  Our BCBeacon gives context to Apple's CLBeacon.  
+A BCBeacon object represents a beacon device. Characterisitics such as beacon loudness and target speed can be changed to customize beacon behaviours for your use case. The SDK syncs and caches beacons from nearby sites for your app based on signigficant location change. This allows the presentation of applied beacon chacteristics quickly once a beacon is ranged.  Our BCBeacon gives context to Apple's CLBeacon.  
 
 ####BCMicroLocation
 
