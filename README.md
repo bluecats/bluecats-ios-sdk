@@ -1,7 +1,7 @@
 BlueCats SDK for iOS7
 ================
 
-Need some beacons? Request a starter pack from [www.bluecats.com](http://www.bluecats.com/starterpack). Will ship you 3 beacons in a neat box along with a code that will give you access to our platform.
+Need some beacons? Request a starter pack from [www.bluecats.com](http://www.bluecats.com/starterpack).
 
 
 
@@ -35,11 +35,11 @@ A BCSite object represents a group of beacons. A site is any place or building t
 
 ####BCBeacon
 
-A BCBeacon object represents a beacon device. Beacon devices are uniquely identified by their composite key (ProximityUUID:Major:Minor). Characterisitics such as beacon loudness and target speed can be changed to customize behaviours for your use case. In addition, you can use our management apps to assign categories such as text, hashtags, or urls to a beacon. The SDK eagerly syncs and caches beacons from nearby sites for your app. Our BCBeacon gives context to Apple's CLBeacon.  
+A BCBeacon object represents a beacon device. Characterisitics such as beacon loudness and target speed can be changed to customize beacon behaviours for your use case. The SDK syncs and caches beacons from nearby sites for your app based on signigficant location change. This allows the presentation of outside beacon data quickly and relaiabily in areas of poor connectivity.  Our BCBeacon gives context to Apple's CLBeacon.  
 
 ####BCMicroLocation
 
-A BCMicroLocation object represents the sites and beacons in proximity to the user. When your app needs some context it can query a micro-location for a sites beacons and categories by proximity. Its all the beacon goodness wrapped up into a tiny object. And integrating micro-locations with your app is simple. Either observe micro-location did update notification or become a delegate of our BCMicroLocationManager and implement the equivalent method.
+A BCMicroLocation object represents the sites and beacons in proximity to the user. When your app needs some context it can query a micro-location for a site's beacons and categories by proximity. It's all the beacon goodness wrapped up into a tiny object. Integrating micro-locations with your app is simple. Either observe a micro-location did update notification or become a delegate of our BCMicroLocationManager and implement the equivalent method.
 
 ## Examples
 
