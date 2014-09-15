@@ -17,5 +17,11 @@
 @property (nonatomic, copy) NSDate *createdAt;
 @property (nonatomic, copy) NSString *createdBy;
 @property (nonatomic, assign) NSInteger mapPointCount;
+@property (nonatomic, copy) NSNumber *scaleX;
+@property (nonatomic, copy) NSNumber *scaleY;
+@property (nonatomic, copy) NSNumber *scaleMarkerAx;
+@property (nonatomic, copy) NSNumber *scaleMarkerAy;
+@property (nonatomic, copy) NSNumber *scaleMarkerBx;
+@property (nonatomic, copy) NSNumber *scaleMarkerBy;
 
 @end

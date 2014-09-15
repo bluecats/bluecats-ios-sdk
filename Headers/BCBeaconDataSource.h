@@ -8,7 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class BCAddress;
+
 @protocol BCBeaconDataSource <NSObject>
+
+@optional
+
+- (BCAddress *)address;
 
 @required
 

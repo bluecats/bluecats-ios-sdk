@@ -14,6 +14,8 @@
 
 @required
 
+- (NSString *)teamID;
+
 - (NSDate *)cachedCategoriesAt;
 - (NSArray *)cachedCategories;
 - (BOOL)hasCategoriesCacheExpired;

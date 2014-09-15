@@ -26,13 +26,10 @@
                              cityName:(NSString *)cityName
                           stateAbbrev:(NSString *)stateAbbrev
                            postalCode:(NSString *)postalCode
-                          countryName:(NSString *)countryName;
+                       andCountryName:(NSString *)countryName;
 
-- (NSString *)cityNameAndStateAbbrevJoinedByComma;
-- (NSString *)latitudeAndLongitudeJoinedByComma;
-- (NSString *)componentsJoinedByComma;
-
-- (BOOL)isAddressEmpty;
++ (BCAddress *)addressWithLatitude:(NSNumber *)latitude
+                      andLongitude:(NSNumber *)longitude;
 
 - (CLLocation *)location;
 

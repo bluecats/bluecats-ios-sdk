@@ -22,6 +22,7 @@
 @property (nonatomic, copy) NSString *alertAction;
 @property (nonatomic, copy) NSString *alertLaunchImage;
 @property (nonatomic, copy) NSString *soundName;
-@property(nonatomic,copy) NSDictionary *userInfo;
+@property (nonatomic, copy) NSDictionary *userInfo;
+@property (nonatomic, assign) BOOL incrementBadgeNumber;
 
 @end

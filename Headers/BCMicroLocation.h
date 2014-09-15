@@ -16,12 +16,18 @@
 @property (nonatomic, copy) NSDictionary *beaconsForSiteID;
 @property (nonatomic, copy) NSDate *timestamp;
 
+- (id)initWithSites:(NSArray *)sites andBeacons:(NSArray *)beacons;
+
+- (NSArray *)beacons;
+
 - (NSArray *)sitesWithBeaconsInProximity:(BCProximity)proximity;
 
 - (NSArray *)sitesWithCategoriesInProximity:(BCProximity)proximity;
 
 - (NSArray *)beaconsForSite:(BCSite *)site
                   proximity:(BCProximity)proximity;
+
+- (NSArray *)beaconsInProximity:(BCProximity)proximity;
 
 - (NSArray *)categoriesForSite:(BCSite *)site
                      proximity:(BCProximity)proximity;

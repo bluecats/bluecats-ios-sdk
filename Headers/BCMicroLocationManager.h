@@ -44,10 +44,10 @@
 // Class methods
 + (BOOL)locationServicesEnabled;
 + (CLAuthorizationStatus)authorizationStatus;
++ (BOOL)isAuthorized;
 + (BOOL)isSiteMonitoringAvailable;
 + (BOOL)isBeaconRangingAvailable;
 + (BOOL)isMicroLocationUpdatingAvailable;
-+ (NSString *)stringForSiteState:(BCSiteState)state;
 
 + (BCMicroLocationManager *)sharedManager;
 + (void)setSharedManager:(BCMicroLocationManager *)sharedManager;
@@ -59,50 +59,50 @@
 
 @optional
 
-- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManager
             didFailWithError:(NSError *)error;
 
 
-- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManager
         didUpdateNearbySites:(NSArray *)sites;
 
 
 
-- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManager
    didStartMonitoringForSite:(BCSite *)site;
 
-- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManager
     monitoringDidFailForSite:(BCSite *)site
                    withError:(NSError *)error;
 
-- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManager
            didDetermineState:(BCSiteState)state
                      forSite:(BCSite *)site;
 
 
 
-- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManager
                 didEnterSite:(BCSite *)site;
 
-- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManager
                  didExitSite:(BCSite *)site;
 
 
 
-- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManager
 rangingBeaconsDidFailForSite:(BCSite *)site
                    withError:(NSError *)error;
 
-- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManager
              didRangeBeacons:(NSArray *)beacons
                       inSite:(BCSite *)site;
 
 
 
-- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManager
      didUpdateMicroLocations:(NSArray *)microLocations;
 
-- (void)microLocationManager:(BCMicroLocationManager *)microLocationManger didUpdateMicroLocationServicesAvailibility:(BOOL)available;
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManager didUpdateMicroLocationServicesAvailibility:(BOOL)available;
 
 @end
 

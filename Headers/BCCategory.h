@@ -19,5 +19,6 @@ typedef enum BCCategoryType {
 @property (nonatomic, copy) NSNumber *categoryTypeID;
 @property (nonatomic, copy) NSString *teamID;
 @property (nonatomic, assign) BCCategoryType categoryType;
+@property (nonatomic, copy) NSDictionary *categoryValues;
 
 @end
