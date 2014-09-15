@@ -249,12 +249,12 @@ Initialize the event manager.
 ``` objective-c
 - (BCEventManager *)eventManager
 {
-    if (!_eventManager) {
-        _eventManager = [[BCEventManager alloc] init];
-        _eventManager.defaultCustomDeviceIdentifier = @"optionalIdentifier";
-        _eventManager.delegate = self;
-    }
-    return _eventManager;
+    if (!_eventManager) {
+        _eventManager = [[BCEventManager alloc] init];
+        _eventManager.defaultCustomDeviceIdentifier = @"optionalIdentifier";
+        _eventManager.delegate = self;
+    }
+    return _eventManager;
 }
 ```
 
@@ -268,12 +268,11 @@ Cleanup the event manager.
 }
 ```
 
-Define the trigger conditions for your event.
+Define the filter conditions for your trigger.
 
 ``` objective-c
 - (void)monitorAnswerProximityTest
 {
-    
     NSString* categoryName = @"category one";
     
     NSArray* proximities = @[[NSNumber numberWithInteger:BCProximityImmediate], [NSNumber numberWithInteger:BCProximityNear], [NSNumber numberWithInteger:BCProximityFar]];
@@ -284,7 +283,7 @@ Define the trigger conditions for your event.
 }
 ```
 
-Handle the event when the conditions are met.
+Handle the triggered event when the conditions are met.
 
 ``` objective-c
 -(void)eventManager:(BCEventManager *)eventManager triggeredEvent:(BCTriggeredEvent *)triggeredEvent
