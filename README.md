@@ -3,8 +3,6 @@ BlueCats SDK for iOS
 
 Need some beacons? Request a starter pack from [www.bluecats.com](http://www.bluecats.com/starterpack).
 
-
-
 ## Getting Started
  
 We recommend installing BlueCats with CocoaPods. CocoaPods is an Objective-C library dependency manager. You can learn more about CocoaPods from [http://cocoapods.org](http://cocoapods.org/).
@@ -44,6 +42,14 @@ A BCMicroLocation object represents the sites and beacons in proximity to the us
 ####BCEventManager and BCTrigger
 
 The BCEventManager notifies delegates when a BCTrigger's event filter conditions are met. For example, the event filters can target a category in a proximity level during a specific period of time. Custom event filters can be created to monitor many other conditions. BCTrigger simplifies the event triggering process.
+
+## Info.plist
+
+iOS8 now requires a description for the reason for accessing the user's location information.  Please see [NSLocationAlwaysUsageDescription](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW18) and  [NSLocationWhenInUseUsageDescription](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW26).
+
+## Options
+
+BCOptionUseLocalStorage: Enables ranging of previously cached beacons from database when network is not available.
 
 ## Examples
 
