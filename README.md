@@ -39,6 +39,6 @@ iOS 7.0 and up
 
 iOS8 now requires a description for the reason for accessing the user's location information.  Please see [NSLocationAlwaysUsageDescription](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW18) and  [NSLocationWhenInUseUsageDescription](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW26).
 
-### New Option
+### New Options
 
-BCOptionUseLocalStorage: Enables ranging of previously cached beacons from database when network is not available.
+Check out some new [SDK options](https://github.com/bluecats/bluecats-ios-sdk/wiki/SDK-Options) in the wiki!
