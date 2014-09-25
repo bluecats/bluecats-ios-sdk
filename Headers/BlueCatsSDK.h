@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Bluecats. All rights reserved.
 //
 
+#import "BCApp.h"
+
 typedef NS_ENUM(int, BCStatus) {
     kBCStatusNeverPurred = 0,
     kBCStatusPurring,
@@ -40,6 +42,8 @@ typedef NS_ENUM(int, BCAppTokenVerificationStatus) {
 + (void)requestAlwaysLocationAuthorization;
 + (void)requestWhenInUseLocationAuthorization;
 
++(BCApp*) currentApp;
+
 @end
 
 extern NSString * const BCOptionUseStageApi;
@@ -49,5 +53,8 @@ extern NSString * const BCOptionMonitorAllAvailableRegionsOnStartup;
 extern NSString * const BCOptionUseEnergySaverScanStrategy;
 extern NSString * const BCOptionCrowdSourceBeaconUpdates;
 extern NSString * const BCOptionUseLocalStorage;
+extern NSString * const BCOptionCacheAllBeaconsForApp;
+extern NSString * const BCOptionDiscoverBeaconsNearby;
+extern NSString * const BCOptionCacheRefreshTimeIntervalInSeconds;
 
 

@@ -23,3 +23,6 @@
 @end
 
 extern NSString * const BCLocalNotificationManagerDidChangeLocalNotifications;
+extern NSString * const BCLocalNotificationManagerDidPresentLocalNotification;
+
+extern NSString * const BCLocalNotificationManagerLocalNotificationItem;

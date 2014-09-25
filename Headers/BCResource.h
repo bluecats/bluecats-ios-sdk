@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BCResource : NSObject
+@interface BCResource : NSObject <NSCopying>
 
 @property (nonatomic, copy) NSString *resourceID;
 @property (nonatomic, copy) NSString *URL;

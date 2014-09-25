@@ -22,18 +22,18 @@ typedef enum {
 } BCBeaconAdType;
 
 typedef enum {
-    BCSyncStatusNotSynced = 0,
-    BCSyncStatusWillNotSync,
-    BCSyncStatusSynced,
-    BCSyncStatusRestored
-} BCSyncStatus;
-
-typedef enum {
     BCVerificationStatusNotVerified = 0,
     BCVerificationStatusDetectedAttack,
     BCVerificationStatusVerifiedViaIBeaconAd,
     BCVerificationStatusVerifiedViaSecureAd
 } BCVerificationStatus;
+
+typedef enum {
+    BCSyncStatusNotSynced = 0,
+    BCSyncStatusWillNotSync,
+    BCSyncStatusSynced,
+    BCSyncStatusRestored
+} BCSyncStatus;
 
 @class BCBatteryStatus, BCBeaconLoudness, BCTargetSpeed, BCMapPoint, BCBeaconRegion, BCBeaconMode;
 
@@ -51,10 +51,12 @@ typedef enum {
 @property (nonatomic, copy) NSString *firmwareVersion;
 @property (nonatomic, copy) NSString *latestFirmwareVersion;
 @property (nonatomic, copy) NSString *modelNumber;
+@property (nonatomic, copy) NSString *serialNumber;
 @property (nonatomic, assign) BOOL upgradableOTA;
 @property (nonatomic, copy) NSNumber *version;
 @property (nonatomic, copy) NSNumber *pendingVersion;
 @property (nonatomic, copy) NSDate *createdAt;
+@property (nonatomic, copy) NSDate *modifiedAt;
 @property (nonatomic, copy) BCBeaconRegion *beaconRegion;
 @property (nonatomic, copy) BCBeaconMode *beaconMode;
 @property (nonatomic, copy) BCBatteryStatus *batteryStatus;
@@ -62,7 +64,7 @@ typedef enum {
 @property (nonatomic, copy) BCTargetSpeed *targetSpeed;
 @property (nonatomic, copy) BCMapPoint *mapPoint;
 @property (nonatomic, copy) NSArray *categories;
-@property (nonatomic, copy) NSDictionary *customValues;
+@property (nonatomic, copy) NSArray *customValues;
 
 // CoreBluetooth properties
 @property (nonatomic, copy) NSUUID *peripheralIdentifier;

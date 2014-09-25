@@ -23,18 +23,19 @@ typedef enum {
 @property (nonatomic, assign) NSInteger beaconCount;
 @property (nonatomic, strong) BCSiteAccessType *siteAccessType;
 @property (nonatomic, copy) NSDate *createdAt;
+@property (nonatomic, copy) NSDate *modifiedAt;
 
 @property (nonatomic, copy) NSDate *syncedAt;
 @property (nonatomic, assign, readonly) BOOL synced;
 @property (nonatomic, copy) NSDate *cachedAt;
-
-- (void)copyApiPropertiesFromSite:(BCSite *)site;
-
 @property (nonatomic, copy) NSString *siteID;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *greeting;
 @property (nonatomic, strong) BCAddress *address;
 @property (nonatomic, copy) NSArray *maps;
+@property (nonatomic, copy) NSArray *customValues;
+
+- (void)copyApiPropertiesFromSite:(BCSite *)site;
 
 @property (nonatomic, copy) NSDate *cachedCategoriesAt;
 @property (nonatomic, copy) NSArray *cachedCategories;

@@ -8,14 +8,12 @@
 
 @class BCResource;
 
-@interface BCMap : NSObject
+@interface BCMap : NSObject <NSCopying>
 
 @property (nonatomic, copy) NSString *mapID;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *siteID;
 @property (nonatomic, strong) BCResource *mapResource;
-@property (nonatomic, copy) NSDate *createdAt;
-@property (nonatomic, copy) NSString *createdBy;
 @property (nonatomic, assign) NSInteger mapPointCount;
 @property (nonatomic, copy) NSNumber *scaleX;
 @property (nonatomic, copy) NSNumber *scaleY;
