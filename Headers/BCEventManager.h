@@ -28,6 +28,7 @@ typedef enum {
 - (NSArray *) allMonitoredEventIdentifiers;
 
 - (void) monitorEventWithTrigger:(BCTrigger*)trigger;
+- (void) monitorEventWithTrigger:(BCTrigger*)trigger eventHandler:(void (^)(BCTriggeredEvent*))eventHandler;
 - (void) removeMonitoredEvent:(NSString*)eventIdentifier;
 - (void) removeAllMonitoredEvents;
 

@@ -21,4 +21,14 @@ typedef enum BCCategoryType {
 @property (nonatomic, assign) BCCategoryType categoryType;
 @property (nonatomic, copy) NSArray *customValues;
 
+- (NSUInteger)numberOfVisitsToday;
+- (NSUInteger)numberOfVisitsYesterday;
+- (NSUInteger)numberOfVisitsThisWeek;
+- (NSUInteger)numberOfVisitsLastWeek;
+- (NSUInteger)numberOfVisitsThisMonth;
+- (NSUInteger)numberOfVisitsLastMonth;
+- (NSUInteger)numberOfVisitsSinceDate:(NSDate *)date;
+- (NSUInteger)numberOfVisitsUntilDate:(NSDate *)date;
+- (NSUInteger)numberOfVisitsFromDate:(NSDate *)startDate untilDate:(NSDate *)endDate;
+
 @end

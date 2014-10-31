@@ -35,7 +35,7 @@ typedef enum {
     BCSyncStatusRestored
 } BCSyncStatus;
 
-@class BCBatteryStatus, BCBeaconLoudness, BCTargetSpeed, BCMapPoint, BCBeaconRegion, BCBeaconMode;
+@class BCBatteryStatus, BCBeaconLoudness, BCTargetSpeed, BCMapPoint, BCBeaconRegion, BCBeaconMode, BCBeaconVersion, BCBeaconVisit;
 
 @interface BCBeacon : NSObject <NSCopying>
 
@@ -94,6 +94,19 @@ typedef enum {
 
 @property (nonatomic, copy) NSDate *verifiedAt;
 @property (nonatomic, assign) BCVerificationStatus verificationStatus;
+
+- (NSUInteger)numberOfVisitsToday;
+- (NSUInteger)numberOfVisitsYesterday;
+- (NSUInteger)numberOfVisitsThisWeek;
+- (NSUInteger)numberOfVisitsLastWeek;
+- (NSUInteger)numberOfVisitsThisMonth;
+- (NSUInteger)numberOfVisitsLastMonth;
+- (NSUInteger)numberOfVisitsSinceDate:(NSDate *)date;
+- (NSUInteger)numberOfVisitsUntilDate:(NSDate *)date;
+- (NSUInteger)numberOfVisitsFromDate:(NSDate *)startDate untilDate:(NSDate *)endDate;
+
++ (NSUInteger)numberOfBeaconsWithPredicate:(NSPredicate *)predicate;
++ (NSArray *)storedBeaconsWithPredicate:(NSPredicate *)predicate andSortDescriptors:(NSArray *)sortDesc;
 
 @end
 

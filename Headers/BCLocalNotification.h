@@ -24,5 +24,6 @@
 @property (nonatomic, copy) NSString *soundName;
 @property (nonatomic, copy) NSDictionary *userInfo;
 @property (nonatomic, assign) BOOL incrementBadgeNumber;
+@property (nonatomic, copy) NSString *category;
 
 @end
