@@ -33,8 +33,9 @@ $ pod update
 
 iOS 7.0 and up
 
-## New in this Version 
+## Have a Question?
 
-### New Options
-
-Check out new SDK options available in the [wiki](https://github.com/bluecats/bluecats-ios-sdk/wiki/SDK-Options)!
+* If you've found a bug, open an issue.
+* If you have a general question, please see our [support center](support.bluecats.com) for articles on our platform and beacons.
+* If you want a particular feature, open an issue.
+* If taking a look at our SDK for the first time, please see our [iOS SDK documentation](https://github.com/bluecats/bluecats-ios-sdk/wiki).
