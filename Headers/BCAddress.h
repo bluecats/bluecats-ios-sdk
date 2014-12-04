@@ -7,7 +7,6 @@
 //
 
 #import "BCJSONModel.h"
-
 @class CLLocation;
 
 @interface BCAddress : BCJSONModel <NSCopying>
