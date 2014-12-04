@@ -6,10 +6,16 @@
 //  Copyright (c) 2014 BlueCats. All rights reserved.
 //
 
-@interface BCCustomValue : NSObject <NSCopying>
+#import "BCJSONModel.h"
+
+@interface BCCustomValue : BCJSONModel <NSCopying>
 
 @property (nonatomic, copy) NSString *customValueID;
 @property (nonatomic, copy) NSString *key;
 @property (nonatomic, copy) NSString *value;
 
+@end
+
+
+@protocol BCCustomValue
 @end

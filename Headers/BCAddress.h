@@ -6,9 +6,11 @@
 //  Copyright (c) 2013 Bluecats. All rights reserved.
 //
 
+#import "BCJSONModel.h"
+
 @class CLLocation;
 
-@interface BCAddress : NSObject <NSCopying>
+@interface BCAddress : BCJSONModel <NSCopying>
 
 @property (nonatomic, copy) NSString *addressID;
 @property (nonatomic, copy) NSString *streetLine1;

@@ -6,9 +6,10 @@
 //  Copyright (c) 2013 BlueCats. All rights reserved.
 //
 
+#import "BCJSONModel.h"
 #import <Foundation/Foundation.h>
 
-@interface BCResource : NSObject <NSCopying>
+@interface BCResource : BCJSONModel<NSCopying>
 
 @property (nonatomic, copy) NSString *resourceID;
 @property (nonatomic, copy) NSString *URL;

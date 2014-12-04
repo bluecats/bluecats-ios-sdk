@@ -6,11 +6,12 @@
 //  Copyright (c) 2014 BlueCats. All rights reserved.
 //
 
+#import "BCJSONModel.h"
 #import <Foundation/Foundation.h>
 
 @class BCManagedBeaconRegionVisit;
 
-@interface BCBeaconRegionVisit : NSObject <NSCopying>
+@interface BCBeaconRegionVisit : BCJSONModel <NSCopying>
 
 @property (nonatomic, copy) NSString *beaconRegionIdentifier;
 @property (nonatomic, copy) NSDate *beganAt;

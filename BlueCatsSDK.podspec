@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'BlueCatsSDK'
-  s.version  = '0.3.4'
+  s.version  = '0.4.0'
   s.license      = {
     :type => 'Commercial',
     :text => <<-LICENSE
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.summary  = 'BlueCatsSDK for micro-location.'
   s.homepage = 'http://www.bluecats.com'
   s.authors   = { 'BlueCats' => 'theteam@bluecats.com' }
-  s.source   = { :git => 'https://github.com/bluecats/bluecats-ios-sdk.git', :tag => '0.3.4' }
+  s.source   = { :git => 'https://github.com/bluecats/bluecats-ios-sdk.git', :tag => '0.4.0' }
   s.platform = :ios, '7.0'
   s.source_files = 'Headers/*.h'
   s.preserve_paths = 'libBlueCatsSDK.a'
@@ -25,23 +25,4 @@ Pod::Spec.new do |s|
   s.frameworks = 'SystemConfiguration', 'CoreBluetooth', 'MobileCoreServices', 'CoreGraphics', 'CoreLocation', 'AdSupport'
   
   s.xcconfig  =  { 'LIBRARY_SEARCH_PATHS' => '"$(PODS_ROOT)/BlueCatsSDK/"' }
-
-  s.ios.dependency 'RestKit', '~> 0.23.1'
-
-  s.prefix_header_contents = <<-EOS
-#import <Availability.h>
-
-#define _AFNETWORKING_PIN_SSL_CERTIFICATES_
-
-#if __IPHONE_OS_VERSION_MIN_REQUIRED
-  #import <SystemConfiguration/SystemConfiguration.h>
-  #import <MobileCoreServices/MobileCoreServices.h>
-  #import <Security/Security.h>
-#else
-  #import <SystemConfiguration/SystemConfiguration.h>
-  #import <CoreServices/CoreServices.h>
-  #import <Security/Security.h>
-#endif
-EOS
-
 end

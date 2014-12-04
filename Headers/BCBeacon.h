@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Bluecats. All rights reserved.
 //
 
+#import "BCJSONModel.h"
+
 typedef enum {
 	BCProximityUnknown = 0,
 	BCProximityImmediate,
@@ -18,7 +20,8 @@ typedef enum {
     BCBeaconAdTypeSphynx1 = 1,
     BCBeaconAdTypeIBeacon2 = 2,
     BCBeaconAdTypeIBeacon3 = 3,
-    BCBeaconAdTypeSecure1 = 4
+    BCBeaconAdTypeSecure1 = 4,
+    BCBeaconAdTypeSecure2 = 6
 } BCBeaconAdType;
 
 typedef enum {
@@ -37,7 +40,7 @@ typedef enum {
 
 @class BCBatteryStatus, BCBeaconLoudness, BCTargetSpeed, BCMapPoint, BCBeaconRegion, BCBeaconMode, BCBeaconVersion, BCBeaconVisit;
 
-@interface BCBeacon : NSObject <NSCopying>
+@interface BCBeacon : BCJSONModel <NSCopying>
 
 // BlueCats Api properties
 @property (nonatomic, copy) NSString *beaconID;
@@ -63,8 +66,8 @@ typedef enum {
 @property (nonatomic, copy) BCBeaconLoudness *beaconLoudness;
 @property (nonatomic, copy) BCTargetSpeed *targetSpeed;
 @property (nonatomic, copy) BCMapPoint *mapPoint;
-@property (nonatomic, copy) NSArray *categories;
-@property (nonatomic, copy) NSArray *customValues;
+@property (nonatomic, strong) NSArray *categories;
+@property (nonatomic, strong) NSArray *customValues;
 
 // CoreBluetooth properties
 @property (nonatomic, copy) NSUUID *peripheralIdentifier;

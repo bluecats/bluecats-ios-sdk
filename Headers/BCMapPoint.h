@@ -6,9 +6,11 @@
 //  Copyright (c) 2013 Bluecats. All rights reserved.
 //
 
+#import "BCJSONModel.h"
+
 @class BCPoint;
 
-@interface BCMapPoint : NSObject <NSCopying>
+@interface BCMapPoint : BCJSONModel<NSCopying>
 
 @property (nonatomic, copy) NSString *mapPointID;
 @property (nonatomic, copy) NSString *mapID;

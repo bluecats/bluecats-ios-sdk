@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Bluecats. All rights reserved.
 //
 
+#import "BCJSONModel.h"
 #import "BCBeaconDataSource.h"
 #import "BCCategoryDataSource.h"
 
@@ -17,7 +18,7 @@ typedef enum {
 
 @class CLLocation, BCAddress, BCSiteAccessType, BCSiteType;
 
-@interface BCSite : NSObject <NSCopying, BCBeaconDataSource, BCCategoryDataSource>
+@interface BCSite : BCJSONModel<NSCopying, BCBeaconDataSource, BCCategoryDataSource>
 
 @property (nonatomic, copy) NSString *teamID;
 @property (nonatomic, assign) NSInteger beaconCount;

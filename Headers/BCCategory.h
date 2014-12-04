@@ -6,13 +6,15 @@
 //  Copyright (c) 2013 Bluecats. All rights reserved.
 //
 
+#import "BCJSONModel.h"
+
 typedef enum BCCategoryType {
     BCCategoryTypeUnknown = 0,
     BCCategoryTypeBlueCats = 1,
     BCCategoryTypeTeam = 2
 } BCCategoryType;
 
-@interface BCCategory : NSObject <NSCopying>
+@interface BCCategory : BCJSONModel <NSCopying>
 
 @property (nonatomic, copy) NSString *categoryID;
 @property (nonatomic, copy) NSString *name;
@@ -32,3 +34,4 @@ typedef enum BCCategoryType {
 - (NSUInteger)numberOfVisitsFromDate:(NSDate *)startDate untilDate:(NSDate *)endDate;
 
 @end
+

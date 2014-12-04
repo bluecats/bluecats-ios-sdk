@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 BlueCats. All rights reserved.
 //
 
+#import "BCJSONModel.h"
 #import <Foundation/Foundation.h>
 
-@interface BCEvent : NSObject<NSCopying>
+@interface BCEvent : BCJSONModel<NSCopying>
 
 @property (nonatomic, copy) NSString *eventID;
 @property (nonatomic, copy) NSString *eventIdentifier;

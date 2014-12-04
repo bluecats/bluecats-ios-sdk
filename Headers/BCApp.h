@@ -5,11 +5,13 @@
 //  Created by Cody Singleton on 8/2/13.
 //  Copyright (c) 2013 Bluecats. All rights reserved.
 //
+
+#import "BCJSONModel.h"
 #import "BCBeaconDataSource.h"
 
 @class BCPlatformType;
 
-@interface BCApp : NSObject<BCBeaconDataSource>
+@interface BCApp : BCJSONModel<BCBeaconDataSource>
 
 @property (nonatomic, copy) NSString *appID;
 @property (nonatomic, copy) NSString *teamID;

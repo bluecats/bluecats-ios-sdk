@@ -6,10 +6,11 @@
 //
 //
 
+#import "BCJSONModel.h"
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-@interface BCPoint : NSObject <NSCopying>
+@interface BCPoint : BCJSONModel<NSCopying>
 
 @property (nonatomic, assign) CGFloat x;
 @property (nonatomic, assign) CGFloat y;

@@ -6,11 +6,12 @@
 //  Copyright (c) 2013 Bluecats. All rights reserved.
 //
 
+#import "BCJSONModel.h"
 #import "BCBeacon.h"
 
 @class CLLocation, BCManagedBeaconVisit;
 
-@interface BCBeaconVisit : NSObject <NSCopying>
+@interface BCBeaconVisit : BCJSONModel <NSCopying>
 
 @property (nonatomic, copy) NSString *beaconVisitID;
 @property (nonatomic, copy) NSString *SDKVersion;
@@ -19,6 +20,7 @@
 @property (nonatomic, copy) NSString *bluetoothAddress;
 @property (nonatomic, copy) NSNumber *major;
 @property (nonatomic, copy) NSNumber *minor;
+@property (nonatomic, copy) NSNumber *version;
 @property (nonatomic, copy) NSString *serialNumber;
 @property (nonatomic, copy) NSString *siteID;
 @property (nonatomic, copy) NSString *deviceUUID;
@@ -44,6 +46,7 @@
 @property (nonatomic, copy) NSDate *lastPostedAt;
 @property (nonatomic, assign) BOOL beganInBackground;
 @property (nonatomic, assign) BOOL endedInBackground;
+@property (nonatomic, assign) NSInteger beaconModeID;
 @property (nonatomic, strong) BCManagedBeaconVisit *managedBeaconVisit;
 
 - (void)setLocation:(CLLocation *)location;
