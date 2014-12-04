@@ -15,6 +15,12 @@ Add a BlueCatsSDK dependency to your Podfile in your Xcode project directory:
 
 ```ruby
 platform :ios, 8.0
+pod 'BlueCatsSDK', :git => 'https://github.com/bluecats/bluecats-ios-sdk.git', :tag => '0.3.4'
+```
+
+Or install the edge version with
+```ruby
+platform :ios, 8.0
 pod 'BlueCatsSDK', :git => 'https://github.com/bluecats/bluecats-ios-sdk.git'
 ```
 
