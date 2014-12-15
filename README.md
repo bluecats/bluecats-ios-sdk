@@ -1,7 +1,7 @@
 BlueCats SDK for iOS
 ================
 
-The BlueCats' iOS SDK has been developed for quick integration and deployment so you can begin receiving accurate and real time proximity verification quickly!
+The BlueCats' SDKs have been developed for easy integration and to offer flexiblity across different use cases.  Please let us know if you have any questions at developers@bluecats.com.
 
 ###**The BlueCats iOS SDK documentation is located [here](https://github.com/bluecats/bluecats-ios-sdk/wiki).**
 
