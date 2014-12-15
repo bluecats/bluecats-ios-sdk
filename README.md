@@ -33,6 +33,8 @@ If you need to update the installed BlueCatsSDK dependency in your project:
 $ pod update
 ```
 
+Note: Don't forget to add `source 'https://github.com/CocoaPods/Specs.git'` to your podfile.
+
 ## Requirements
 
 iOS 7.0 and up
