@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'BlueCatsSDK'
-  s.version  = '0.4.0'
+  s.version  = '0.4.1'
   s.license      = {
     :type => 'Commercial',
     :text => <<-LICENSE
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.summary  = 'BlueCatsSDK for micro-location.'
   s.homepage = 'http://www.bluecats.com'
   s.authors   = { 'BlueCats' => 'theteam@bluecats.com' }
-  s.source   = { :git => 'https://github.com/bluecats/bluecats-ios-sdk.git', :tag => '0.4.0' }
+  s.source   = { :git => 'https://github.com/bluecats/bluecats-ios-sdk.git', :tag => '0.4.1' }
   s.platform = :ios, '7.0'
   s.source_files = 'Headers/*.h'
   s.preserve_paths = 'libBlueCatsSDK.a'

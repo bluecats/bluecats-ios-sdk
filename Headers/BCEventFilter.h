@@ -64,6 +64,8 @@
 +(id<BCEventFilter>)filterByExitedBeaconAfterTimeIntervalUnmatched:(NSTimeInterval)minTimeIntervalUnmatched;
 +(id<BCEventFilter>)filterByExitedAllBeaconsAfterTimeInterval:(NSTimeInterval)minTimeIntervalUnmatched;
 
++(id<BCEventFilter>)filterByReassembledBlockDataWithDataType:(BCBlockDataType)dataType;
+
 @end
 
 

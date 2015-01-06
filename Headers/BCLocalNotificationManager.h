@@ -8,6 +8,7 @@
 
 @class BCLocalNotification;
 
+NS_CLASS_AVAILABLE(NA, 7_0)
 @interface BCLocalNotificationManager : NSObject
 
 + (BCLocalNotificationManager *)sharedManager;

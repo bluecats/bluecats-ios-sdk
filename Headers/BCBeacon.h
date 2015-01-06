@@ -16,19 +16,21 @@ typedef enum {
 } BCProximity;
 
 typedef enum {
-    BCBeaconAdTypeUnknown = 0,
-    BCBeaconAdTypeSphynx1 = 1,
-    BCBeaconAdTypeIBeacon2 = 2,
-    BCBeaconAdTypeIBeacon3 = 3,
-    BCBeaconAdTypeSecure1 = 4,
-    BCBeaconAdTypeSecure2 = 6
-} BCBeaconAdType;
+    BCBlueCatsAdDataTypeUnknown = 0,
+    BCBlueCatsAdDataTypeSphynx1 = 1,
+    BCBlueCatsAdDataTypeIBeacon2 = 2,
+    BCBlueCatsAdDataTypeIBeacon3 = 3,
+    BCBlueCatsAdDataTypeSecure1 = 4,
+    BCBlueCatsAdDataTypeIBeacon4 = 5,
+    BCBlueCatsAdDataTypeSecure2 = 6,
+    BCBlueCatsAdDataTypeData1 = 7
+} BCBlueCatsAdDataType;
 
 typedef enum {
     BCVerificationStatusNotVerified = 0,
     BCVerificationStatusDetectedAttack,
-    BCVerificationStatusVerifiedViaIBeaconAd,
-    BCVerificationStatusVerifiedViaSecureAd
+    BCVerificationStatusVerifiedViaBlueCatsIBeaconAd,
+    BCVerificationStatusVerifiedViaBueCatsSecureAd
 } BCVerificationStatus;
 
 typedef enum {
@@ -37,6 +39,17 @@ typedef enum {
     BCSyncStatusSynced,
     BCSyncStatusRestored
 } BCSyncStatus;
+
+typedef enum {
+    BCBlockDataEncodingNone = 0,
+    BCBlockDataEncodingUTF8
+} BCBlockDataEncoding;
+
+typedef enum {
+    BCBlockDataTypeCustom = 0,
+    BCBlockDataTypeTempInCelcius
+} BCBlockDataType;
+
 
 @class BCBatteryStatus, BCBeaconLoudness, BCTargetSpeed, BCMapPoint, BCBeaconRegion, BCBeaconMode, BCBeaconVersion, BCBeaconVisit;
 
@@ -74,7 +87,6 @@ typedef enum {
 @property (nonatomic, copy) NSDate *firstDiscoveredAt;
 @property (nonatomic, copy) NSDate *lastDiscoveredAt;
 @property (nonatomic, assign, readonly) BOOL discovered;
-@property (nonatomic, copy) NSDictionary *blueCatsAdData;
 
 // iBeacon properties
 @property (nonatomic, copy) NSString *proximityUUIDString;
@@ -98,6 +110,15 @@ typedef enum {
 @property (nonatomic, copy) NSDate *verifiedAt;
 @property (nonatomic, assign) BCVerificationStatus verificationStatus;
 
+- (void)removeAllAdData;
+- (void)removeAdDataForAdDataTypeKey:(NSString *)adDataTypeKey;
+- (void)setAdData:(NSDictionary *)adData forAdDataTypeKey:(NSString *)adDataTypeKey;
+- (NSDictionary *)adDataForAdDataTypeKey:(NSString *)adDataTypeKey;
+- (id)objectFromBlueCatsAdDataForKey:(NSString *)key;
+
+- (NSArray *)reassembledBlockDataWithDataType:(BCBlockDataType)dataType;
+- (NSDictionary *)lastReassembledBlockDataWithDataType:(BCBlockDataType)dataType;
+
 - (NSUInteger)numberOfVisitsToday;
 - (NSUInteger)numberOfVisitsYesterday;
 - (NSUInteger)numberOfVisitsThisWeek;
@@ -113,26 +134,48 @@ typedef enum {
 
 @end
 
-extern NSString * const BCAdvertisementDataBeaconModeIDKey;
-extern NSString * const BCAdvertisementDataVersionKey;
-extern NSString * const BCAdvertisementDataAdTypeKey;
-extern NSString * const BCAdvertisementDataProximityUUIDStringKey;
-extern NSString * const BCAdvertisementDataBluetoothAddressStringKey;
-extern NSString * const BCAdvertisementDataMajorKey;
-extern NSString * const BCAdvertisementDataMinorKey;
-extern NSString * const BCAdvertisementDataFirmwareVersionKey;
-extern NSString * const BCAdvertisementDataModelNumberKey;
-extern NSString * const BCAdvertisementDataBatteryLevelKey;
-extern NSString * const BCAdvertisementDataTxPowerLevelKey;
-extern NSString * const BCAdvertisementDataMeasuredPowerAt1MeterKey;
-extern NSString * const BCAdvertisementDataBeaconLoudnessLevelKey;
-extern NSString * const BCAdvertisementDataTargetSpeedInMillisecondsKey;
-extern NSString * const BCAdvertisementDataSequenceNumberKey;
-
 extern NSString * const BCFirmwareVersion002;
 extern NSString * const BCFirmwareVersion010;
 extern NSString * const BCFirmwareVersion011;
 extern NSString * const BCFirmwareVersion020;
 extern NSString * const BCFirmwareVersion030;
 extern NSString * const BCFirmwareVersion031;
+
+extern NSString * const BCAdDataTypeKey;
+
+extern NSString * const BCAdDataTypeAppleIBeaconKey;
+extern NSString * const BCAdDataTypeBlueCatsSphynxKey;
+extern NSString * const BCAdDataTypeBlueCatsIBeaconKey;
+extern NSString * const BCAdDataTypeBlueCatsSecureKey;
+extern NSString * const BCAdDataTypeBlueCatsBlockDataKey;
+
+extern NSString * const BCBlueCatsAdDataBeaconModeIDKey;
+extern NSString * const BCBlueCatsAdDataVersionKey;
+extern NSString * const BCBlueCatsAdDataTypeKey;
+extern NSString * const BCBlueCatsAdDataProximityUUIDStringKey;
+extern NSString * const BCBlueCatsAdDataBluetoothAddressStringKey;
+extern NSString * const BCBlueCatsAdDataMajorKey;
+extern NSString * const BCBlueCatsAdDataMinorKey;
+extern NSString * const BCBlueCatsAdDataFirmwareVersionKey;
+extern NSString * const BCBlueCatsAdDataModelNumberKey;
+extern NSString * const BCBlueCatsAdDataBatteryLevelKey;
+extern NSString * const BCBlueCatsAdDataTxPowerLevelKey;
+extern NSString * const BCBlueCatsAdDataMeasuredPowerAt1MeterKey;
+extern NSString * const BCBlueCatsAdDataBeaconLoudnessLevelKey;
+extern NSString * const BCBlueCatsAdDataTargetSpeedInMillisecondsKey;
+extern NSString * const BCBlueCatsAdDataSequenceNumberKey;
+
+extern NSString * const BCBlueCatsBlockDataIdentifierKey;
+extern NSString * const BCBlueCatsBlockDataTypeKey;
+extern NSString * const BCBlueCatsBlockDataEncodingKey;
+extern NSString * const BCBlueCatsBlockDataCountKey;
+extern NSString * const BCBlueCatsBlockDataIndexKey;
+extern NSString * const BCBlueCatsBlockDataLengthKey;
+extern NSString * const BCBlueCatsBlockDataKey;
+extern NSString * const BCBlueCatsIndexedBlockDataKey;
+
+extern NSString * const BCAppleIBeaconAdDataProximityUUIDStringKey;
+extern NSString * const BCAppleIBeaconAdDataMajorKey;
+extern NSString * const BCAppleIBeaconAdDataMinorKey;
+extern NSString * const BCAppleIBeaconAdDataMeasuredPowerAt1MeterKey;
 
