@@ -14,12 +14,7 @@ We recommend installing BlueCats with CocoaPods. CocoaPods is an Objective-C lib
 Add a BlueCatsSDK dependency to your Podfile in your Xcode project directory:
 
 ```ruby
-pod 'BlueCatsSDK', :git => 'https://github.com/bluecats/bluecats-ios-sdk.git', :tag => '0.3.4'
-```
-
-Or install the edge version with
-```ruby
-pod 'BlueCatsSDK', :git => 'https://github.com/bluecats/bluecats-ios-sdk.git'
+pod 'BlueCatsSDK', :git => 'https://github.com/bluecats/bluecats-ios-sdk.git', :tag => '0.4.1'
 ```
 
 Now you can install the BlueCatsSDK dependency in your project:
