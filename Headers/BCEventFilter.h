@@ -49,6 +49,8 @@
 +(id<BCEventFilter>)filterByAccuracyRangeFrom:(double)fromAccuracy to:(double)toAccuracy;
 +(id<BCEventFilter>)filterByCategoriesNamed:(NSArray *)categoryNames;
 +(id<BCEventFilter>)filterByCategoriesWithIDs:(NSArray *)categoryIDs;
++(id<BCEventFilter>)filterByCustomValuesWithKeys:(NSArray *)customValueKeys;
++(id<BCEventFilter>)filterByCategoriesWithCustomValueKeys:(NSArray *)keys;
 +(id<BCEventFilter>)filterBySitesNamed:(NSArray *)siteNames;
 +(id<BCEventFilter>)filterBySitesWithIDs:(NSArray *)siteIDs;
 +(id<BCEventFilter>)filterBySitesWithPredicate:(NSPredicate*)sitePredicate;
@@ -65,7 +67,7 @@
 +(id<BCEventFilter>)filterByExitedAllBeaconsAfterTimeInterval:(NSTimeInterval)minTimeIntervalUnmatched;
 
 +(id<BCEventFilter>)filterByReassembledBlockDataWithDataType:(BCBlockDataType)dataType;
-
++(id<BCEventFilter>)filterByNeverEnteredBeacon;
 @end
 
 

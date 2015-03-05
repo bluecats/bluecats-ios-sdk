@@ -104,6 +104,10 @@ rangingBeaconsDidFailForSite:(BCSite *)site
 
 - (void)microLocationManager:(BCMicroLocationManager *)microLocationManager didUpdateMicroLocationServicesAvailibility:(BOOL)available;
 
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManager didBeginVisitForBeaconsWithSerialNumbers:(NSArray *)serialNumbers;
+
+- (void)microLocationManager:(BCMicroLocationManager *)microLocationManager didEndVisitForBeaconsWithSerialNumbers:(NSArray *)serialNumbers;
+
 @end
 
 extern NSString * const BCMicroLocationManagerDidEnterSite;

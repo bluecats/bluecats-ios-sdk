@@ -49,6 +49,8 @@
 @property (nonatomic, assign) NSInteger beaconModeID;
 @property (nonatomic, strong) BCManagedBeaconVisit *managedBeaconVisit;
 
+@property (nonatomic, assign, getter=isCurrentlyVisiting) BOOL currentlyVisiting;
+
 - (void)setLocation:(CLLocation *)location;
 
 + (BCBeaconVisit *)beaconVisitWithManagedBeaconVisit:(BCManagedBeaconVisit *)managedbeaconVisit;
