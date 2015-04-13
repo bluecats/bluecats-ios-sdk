@@ -64,4 +64,7 @@ extern NSString * const BCOptionDiscoverBeaconsNearby;
 extern NSString * const BCOptionCacheRefreshTimeIntervalInSeconds;
 extern NSString * const BCOptionShowBluetoothPowerWarningMessage;
 
+// public notifications
+
+extern NSString * const BCNotificationBluetoothPoweredOn;
 

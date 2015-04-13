@@ -48,8 +48,12 @@ typedef enum {
 
 typedef enum {
     BCBlockDataTypeCustom = 0,
-    BCBlockDataTypeTempInCelcius,
+    BCBlockDataTypeTemperature,
 } BCBlockDataType;
+
+typedef enum {
+    BCBeaconEndpointUSBHost = 0
+} BCBeaconEndpoint;
 
 
 @class BCBatteryStatus, BCBeaconLoudness, BCTargetSpeed, BCMapPoint, BCBeaconRegion, BCBeaconMode, BCBeaconVersion, BCBeaconVisit;
@@ -59,7 +63,6 @@ typedef enum {
 // BlueCats Api properties
 @property (nonatomic, copy) NSString *beaconID;
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *message;
 @property (nonatomic, copy) NSString *teamID;
 @property (nonatomic, copy) NSString *siteID;
 @property (nonatomic, copy) NSString *siteName;
@@ -67,6 +70,7 @@ typedef enum {
 @property (nonatomic, copy) NSNumber *measuredPowerAt1Meter;
 @property (nonatomic, copy) NSString *firmwareVersion;
 @property (nonatomic, copy) NSString *latestFirmwareVersion;
+@property (nonatomic, copy) NSNumber *privacyDuration;
 @property (nonatomic, copy) NSString *modelNumber;
 @property (nonatomic, copy) NSString *serialNumber;
 @property (nonatomic, assign) BOOL upgradableOTA;
@@ -77,6 +81,7 @@ typedef enum {
 @property (nonatomic, copy) BCBeaconRegion *beaconRegion;
 @property (nonatomic, copy) BCBeaconMode *beaconMode;
 @property (nonatomic, copy) BCBatteryStatus *batteryStatus;
+@property (nonatomic, copy) NSNumber *lastKnownBatteryLevel;
 @property (nonatomic, copy) BCBeaconLoudness *beaconLoudness;
 @property (nonatomic, copy) BCTargetSpeed *targetSpeed;
 @property (nonatomic, copy) BCMapPoint *mapPoint;
@@ -121,6 +126,12 @@ typedef enum {
 - (NSArray *)reassembledBlockDataWithDataType:(BCBlockDataType)dataType;
 - (NSDictionary *)lastReassembledBlockDataWithDataType:(BCBlockDataType)dataType;
 
+- (void)requestDataArrayFromBeaconEndpoint:(BCBeaconEndpoint)endpoint
+                             withDataArray:(NSArray *)requestDataArray
+                                   success:(void (^)(NSArray *responseDataArray))success
+                                    status:(void (^)(NSString *status))status
+                                   failure:(void (^)(NSError *error))failure;
+
 - (NSUInteger)numberOfVisitsToday;
 - (NSUInteger)numberOfVisitsYesterday;
 - (NSUInteger)numberOfVisitsThisWeek;
@@ -146,14 +157,18 @@ extern NSString * const BCFirmwareVersion040;
 extern NSString * const BCFirmwareVersion041;
 extern NSString * const BCFirmwareVersion050;
 extern NSString * const BCFirmwareVersion051;
+extern NSString * const BCFirmwareVersion052;
 
 extern NSString * const BCAdDataTypeKey;
-
 extern NSString * const BCAdDataTypeAppleIBeaconKey;
 extern NSString * const BCAdDataTypeBlueCatsSphynxKey;
 extern NSString * const BCAdDataTypeBlueCatsIBeaconKey;
 extern NSString * const BCAdDataTypeBlueCatsSecureKey;
 extern NSString * const BCAdDataTypeBlueCatsBlockDataKey;
+extern NSString * const BCAdDataTimestampKey;
+extern NSString * const BCAdDataFirstDiscoveredAtKey;
+extern NSString * const BCAdDataDiscoveredCountKey;
+extern NSString * const BCAdDataDiscoveredPerMinuteKey;
 
 extern NSString * const BCBlueCatsAdDataBeaconModeIDKey;
 extern NSString * const BCBlueCatsAdDataVersionKey;
@@ -170,10 +185,6 @@ extern NSString * const BCBlueCatsAdDataMeasuredPowerAt1MeterKey;
 extern NSString * const BCBlueCatsAdDataBeaconLoudnessLevelKey;
 extern NSString * const BCBlueCatsAdDataTargetSpeedInMillisecondsKey;
 extern NSString * const BCBlueCatsAdDataSequenceNumberKey;
-extern NSString * const BCBlueCatsAdDataTimestampKey;
-extern NSString * const BCBlueCatsAdDataFirstRecievedAtKey;
-extern NSString * const BCBlueCatsAdDataRecievedCountKey;
-extern NSString * const BCBlueCatsAdDataCountPerMinuteKey;
 
 extern NSString * const BCBlueCatsBlockDataIdentifierKey;
 extern NSString * const BCBlueCatsBlockDataTypeKey;
@@ -183,14 +194,11 @@ extern NSString * const BCBlueCatsBlockDataIndexKey;
 extern NSString * const BCBlueCatsBlockDataLengthKey;
 extern NSString * const BCBlueCatsBlockDataKey;
 extern NSString * const BCBlueCatsIndexedBlockDataKey;
-extern NSString * const BCBlueCatsBlockDataTimestampKey;
+extern NSString * const BCBlueCatsBlockDataReassembledAtKey;
 
 extern NSString * const BCAppleIBeaconAdDataProximityUUIDStringKey;
 extern NSString * const BCAppleIBeaconAdDataMajorKey;
 extern NSString * const BCAppleIBeaconAdDataMinorKey;
 extern NSString * const BCAppleIBeaconAdDataMeasuredPowerAt1MeterKey;
-extern NSString * const BCAppleIBeaconAdDataTimestampKey;
-extern NSString * const BCAppleIBeaconAdDataFirstRecievedAtKey;
-extern NSString * const BCAppleIBeaconAdDataRecievedCountKey;
-extern NSString * const BCAppleIBeaconAdDataCountPerMinuteKey;
+
 

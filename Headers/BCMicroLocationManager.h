@@ -104,6 +104,10 @@ rangingBeaconsDidFailForSite:(BCSite *)site
 
 - (void)microLocationManager:(BCMicroLocationManager *)microLocationManager didUpdateMicroLocationServicesAvailibility:(BOOL)available;
 
+/*
+ These need to send something other than serial numbers because we might begin
+ visit before delegate gets call about ranging beacons.
+ */
 - (void)microLocationManager:(BCMicroLocationManager *)microLocationManager didBeginVisitForBeaconsWithSerialNumbers:(NSArray *)serialNumbers;
 
 - (void)microLocationManager:(BCMicroLocationManager *)microLocationManager didEndVisitForBeaconsWithSerialNumbers:(NSArray *)serialNumbers;
