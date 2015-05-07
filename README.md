@@ -28,10 +28,6 @@ If you need to update the installed BlueCatsSDK dependency in your project:
 $ pod update
 ```
 
-## Requirements
-
-iOS 7.0 and up
-
 ## Have a Question?
 
 * If you've found a bug, open an issue.
