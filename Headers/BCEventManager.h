@@ -27,12 +27,28 @@ typedef enum {
 
 - (NSArray *) allMonitoredEventIdentifiers;
 
+/**
+ *  these two methods reset the trigger count to 0 by default
+ *
+ *  @param trigger event trigger
+ */
 - (void) monitorEventWithTrigger:(BCTrigger*)trigger;
 - (void) monitorEventWithTrigger:(BCTrigger*)trigger eventHandler:(void (^)(BCTriggeredEvent*))eventHandler;
+
+/**
+ *  monitor event with trigger with restore option
+ *
+ *  @param trigger event trigger
+ *  @param restoreTriggeredCount   YES: restore the trigger count from cache    NO: reset the trigger count to 0
+ */
+- (void) monitorEventWithTrigger:(BCTrigger*)trigger restoreTriggeredCount:(BOOL)restoreTriggeredCount;
+- (void) monitorEventWithTrigger:(BCTrigger*)trigger restoreTriggeredCount:(BOOL)restoreTriggeredCount eventHandler:(void (^)(BCTriggeredEvent*))eventHandler;
+
 - (void) removeMonitoredEvent:(NSString*)eventIdentifier;
 - (void) removeAllMonitoredEvents;
 
 - (void) logEvent:(BCEvent*)event withPriority:(BCEventPriority)priority;
+- (void) loadEventFiltersFromDictionary:(NSDictionary *)dictionary;
 
 + (BCEventManager *)sharedManager;
 

@@ -7,6 +7,7 @@
 //
 
 #import "BCJSONModel.h"
+#import "BCCategoryDataSource.h"
 
 typedef enum BCCategoryType {
     BCCategoryTypeUnknown = 0,
@@ -14,7 +15,7 @@ typedef enum BCCategoryType {
     BCCategoryTypeTeam = 2
 } BCCategoryType;
 
-@interface BCCategory : BCJSONModel <NSCopying>
+@interface BCCategory : BCJSONModel <NSCopying, BCCustomValueDataSource>
 
 @property (nonatomic, copy) NSString *categoryID;
 @property (nonatomic, copy) NSString *name;
@@ -23,15 +24,35 @@ typedef enum BCCategoryType {
 @property (nonatomic, assign) BCCategoryType categoryType;
 @property (nonatomic, copy) NSArray *customValues;
 
-- (NSUInteger)numberOfVisitsToday;
-- (NSUInteger)numberOfVisitsYesterday;
-- (NSUInteger)numberOfVisitsThisWeek;
-- (NSUInteger)numberOfVisitsLastWeek;
-- (NSUInteger)numberOfVisitsThisMonth;
-- (NSUInteger)numberOfVisitsLastMonth;
-- (NSUInteger)numberOfVisitsSinceDate:(NSDate *)date;
-- (NSUInteger)numberOfVisitsUntilDate:(NSDate *)date;
-- (NSUInteger)numberOfVisitsFromDate:(NSDate *)startDate untilDate:(NSDate *)endDate;
+- (void)numberOfVisitsTodayWithSuccess:(void (^)(NSUInteger visitCount))success
+                               failure:(void (^)(NSError *error))failure;
+
+- (void)numberOfVisitsYesterdayWithSuccess:(void (^)(NSUInteger visitCount))success
+                                   failure:(void (^)(NSError *error))failure;
+
+- (void)numberOfVisitsThisWeekWithSuccess:(void (^)(NSUInteger visitCount))success
+                                  failure:(void (^)(NSError *error))failure;
+
+- (void)numberOfVisitsLastWeekWithSuccess:(void (^)(NSUInteger visitCount))success
+                                  failure:(void (^)(NSError *error))failure;
+
+- (void)numberOfVisitsThisMonthWithSuccess:(void (^)(NSUInteger visitCount))success
+                                   failure:(void (^)(NSError *error))failure;
+
+- (void)numberOfVisitsLastMonthWithSuccess:(void (^)(NSUInteger visitCount))success
+                                   failure:(void (^)(NSError *error))failure;
+
+- (void)numberOfVisitsSinceDate:(NSDate *)date
+                        success:(void (^)(NSUInteger visitCount))success
+                        failure:(void (^)(NSError *error))failure;
+
+- (void)numberOfVisitsUntilDate:(NSDate *)date
+                        success:(void (^)(NSUInteger visitCount))success
+                        failure:(void (^)(NSError *error))failure;
+
+- (void)numberOfVisitsFromDate:(NSDate *)startDate untilDate:(NSDate *)endDate
+                       success:(void (^)(NSUInteger visitCount))success
+                       failure:(void (^)(NSError *error))failure;
 
 @end
 

@@ -47,16 +47,20 @@
 @property (nonatomic, assign) BOOL beganInBackground;
 @property (nonatomic, assign) BOOL endedInBackground;
 @property (nonatomic, assign) NSInteger beaconModeID;
-@property (nonatomic, strong) BCManagedBeaconVisit *managedBeaconVisit;
 
 @property (nonatomic, assign, getter=isCurrentlyVisiting) BOOL currentlyVisiting;
 
+- (id)initWithManagedBeaconVisit:(BCManagedBeaconVisit *)managedBeaconVisit;
+
 - (void)setLocation:(CLLocation *)location;
 
-+ (BCBeaconVisit *)beaconVisitWithManagedBeaconVisit:(BCManagedBeaconVisit *)managedbeaconVisit;
++ (void)storedVisitsWithPredicate:(NSPredicate *)predicate
+                  sortDescriptors:(NSArray *)sortDesc
+                          success:(void (^)(NSArray *visits))success
+                          failure:(void (^)(NSError *error))failure;
 
-+ (NSArray *)storedVisitsWithPredicate:(NSPredicate *)predicate andSortDescriptors:(NSArray *)sortDesc;
-
-+ (NSUInteger)numberOfVisitsWithPredicate:(NSPredicate *)predicate;
++ (void)numberOfVisitsWithPredicate:(NSPredicate *)predicate
+                            success:(void (^)(NSUInteger visitCount))success
+                            failure:(void (^)(NSError *error))failure;
 
 @end

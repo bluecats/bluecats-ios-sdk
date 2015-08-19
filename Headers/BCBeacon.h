@@ -7,6 +7,7 @@
 //
 
 #import "BCJSONModel.h"
+#import "BCCategoryDataSource.h"
 
 typedef enum {
 	BCProximityUnknown = 0,
@@ -23,7 +24,8 @@ typedef enum {
     BCBlueCatsAdDataTypeSecure1 = 4,
     BCBlueCatsAdDataTypeIBeacon4 = 5,
     BCBlueCatsAdDataTypeSecure2 = 6,
-    BCBlueCatsAdDataTypeData1 = 7
+    BCBlueCatsAdDataTypeData1 = 7,
+    BCBlueCatsAdDataTypeData2 = 8
 } BCBlueCatsAdDataType;
 
 typedef enum {
@@ -34,10 +36,18 @@ typedef enum {
 } BCVerificationStatus;
 
 typedef enum {
+    //No relevant request has been made to the server
     BCSyncStatusNotSynced = 0,
-    BCSyncStatusWillNotSync,
+    //Relevant request has been made to the server and this beacon was not included
+    BCSyncStatusUnauthorized,
+    //Basic access information has been synced
+    BCSyncStatusAccessSynced,
+    //Full data has been synced
     BCSyncStatusSynced,
-    BCSyncStatusRestored
+    //Data has been restored from local DB
+    BCSyncStatusRestored,
+    //Whatever data has been synced for this beacon is now stale
+    BCSyncStatusExpired
 } BCSyncStatus;
 
 typedef enum {
@@ -48,17 +58,30 @@ typedef enum {
 
 typedef enum {
     BCBlockDataTypeCustom = 0,
-    BCBlockDataTypeTemperature,
+    BCBlockDataTypeTemperature = 15
 } BCBlockDataType;
 
 typedef enum {
     BCBeaconEndpointUSBHost = 0
 } BCBeaconEndpoint;
 
+typedef enum {
+    BCBeaconOwnershipUnknown = 0,
+    BCBeaconOwnershipOwned = 1,
+    BCBeaconOwnershipShared = 2,
+    BCBeaconOwnershipPublic = 3
+} BCBeaconOwnership;
 
-@class BCBatteryStatus, BCBeaconLoudness, BCTargetSpeed, BCMapPoint, BCBeaconRegion, BCBeaconMode, BCBeaconVersion, BCBeaconVisit;
+typedef enum {
+    BCBeaconAccessRoleVisitTracker = 1,
+    BCBeaconAccessRoleBeaconRanger = 2,
+    BCBeaconAccessRoleSettingsUpdater = 3
+} BCBeaconAccessRole;
 
-@interface BCBeacon : BCJSONModel <NSCopying>
+
+@class BCBatteryStatus, BCBeaconLoudness, BCTargetSpeed, BCMapPoint, BCBeaconRegion, BCBeaconMode, BCBeaconVersion, BCBeaconVisit, BCNetworkAccess,BCNetworkAccessRole,BCNetworkAccessOwnership;
+
+@interface BCBeacon : BCJSONModel <NSCopying, BCCustomValueDataSource>
 
 // BlueCats Api properties
 @property (nonatomic, copy) NSString *beaconID;
@@ -85,6 +108,7 @@ typedef enum {
 @property (nonatomic, copy) BCBeaconLoudness *beaconLoudness;
 @property (nonatomic, copy) BCTargetSpeed *targetSpeed;
 @property (nonatomic, copy) BCMapPoint *mapPoint;
+@property (nonatomic, copy) BCNetworkAccess *networkAccess;
 @property (nonatomic, strong) NSArray *categories;
 @property (nonatomic, strong) NSArray *customValues;
 
@@ -132,18 +156,43 @@ typedef enum {
                                     status:(void (^)(NSString *status))status
                                    failure:(void (^)(NSError *error))failure;
 
-- (NSUInteger)numberOfVisitsToday;
-- (NSUInteger)numberOfVisitsYesterday;
-- (NSUInteger)numberOfVisitsThisWeek;
-- (NSUInteger)numberOfVisitsLastWeek;
-- (NSUInteger)numberOfVisitsThisMonth;
-- (NSUInteger)numberOfVisitsLastMonth;
-- (NSUInteger)numberOfVisitsSinceDate:(NSDate *)date;
-- (NSUInteger)numberOfVisitsUntilDate:(NSDate *)date;
-- (NSUInteger)numberOfVisitsFromDate:(NSDate *)startDate untilDate:(NSDate *)endDate;
+- (void)numberOfVisitsTodayWithSuccess:(void (^)(NSUInteger visitCount))success
+                               failure:(void (^)(NSError *error))failure;
 
-+ (NSUInteger)numberOfBeaconsWithPredicate:(NSPredicate *)predicate;
-+ (NSArray *)storedBeaconsWithPredicate:(NSPredicate *)predicate andSortDescriptors:(NSArray *)sortDesc;
+- (void)numberOfVisitsYesterdayWithSuccess:(void (^)(NSUInteger visitCount))success
+                                   failure:(void (^)(NSError *error))failure;
+
+- (void)numberOfVisitsThisWeekWithSuccess:(void (^)(NSUInteger visitCount))success
+                                  failure:(void (^)(NSError *error))failure;
+
+- (void)numberOfVisitsLastWeekWithSuccess:(void (^)(NSUInteger visitCount))success
+                                  failure:(void (^)(NSError *error))failure;
+
+- (void)numberOfVisitsThisMonthWithSuccess:(void (^)(NSUInteger visitCount))success
+                                   failure:(void (^)(NSError *error))failure;
+
+- (void)numberOfVisitsLastMonthWithSuccess:(void (^)(NSUInteger visitCount))success
+                                   failure:(void (^)(NSError *error))failure;
+
+- (void)numberOfVisitsSinceDate:(NSDate *)date
+                        success:(void (^)(NSUInteger visitCount))success
+                        failure:(void (^)(NSError *error))failure;
+
+- (void)numberOfVisitsUntilDate:(NSDate *)date
+                        success:(void (^)(NSUInteger visitCount))success
+                        failure:(void (^)(NSError *error))failure;
+
+- (void)numberOfVisitsFromDate:(NSDate *)startDate untilDate:(NSDate *)endDate
+                       success:(void (^)(NSUInteger visitCount))success
+                       failure:(void (^)(NSError *error))failure;
+
++ (void)storedBeaconsWithPredicate:(NSPredicate *)predicate sortDescriptors:(NSArray *)sortDesc
+                           success:(void (^)(NSArray *beacons))success
+                           failure:(void (^)(NSError *error))failure;
+
++ (void)numberOfBeaconsWithPredicate:(NSPredicate *)predicate
+                             success:(void (^)(NSUInteger count))success
+                             failure:(void (^)(NSError *error))failure;
 
 @end
 

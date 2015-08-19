@@ -18,9 +18,16 @@
 @property (nonatomic, copy) NSDate *endedAt;
 @property (nonatomic, copy) NSString *beaconRegionVisitID;
 @property (nonatomic, assign) BOOL appInForeground;
-@property (nonatomic, strong) BCManagedBeaconRegionVisit *managedRegionVisit;
 
-+ (NSArray *)storedVisitsWithPredicate:(NSPredicate *)predicate andSortDescriptors:(NSArray *)sortDesc;
-+ (NSUInteger)numberOfVisitsWithPredicate:(NSPredicate *)predicate;
+- (id)initWithManagedBeaconRegionVisit:(BCManagedBeaconRegionVisit *)managedBeaconRegionVisit;
+
++ (void)storedVisitsWithPredicate:(NSPredicate *)predicate
+                  sortDescriptors:(NSArray *)sortDesc
+                          success:(void (^)(NSArray *visits))success
+                          failure:(void (^)(NSError *error))failure;
+
++ (void)numberOfVisitsWithPredicate:(NSPredicate *)predicate
+                            success:(void (^)(NSUInteger visitCount))success
+                            failure:(void (^)(NSError *error))failure;
 
 @end

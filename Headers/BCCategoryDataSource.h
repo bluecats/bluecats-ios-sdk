@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol BCCustomValueDataSource <NSObject>
+
+- (NSArray *)customValues;
+
+@end
+
 @class BCCategory;
 
 @protocol BCCategoryDataSource <NSObject>

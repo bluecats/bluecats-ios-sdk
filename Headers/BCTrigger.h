@@ -12,6 +12,7 @@
 @interface BCTrigger : NSObject<NSCopying>
 
 @property (nonatomic, copy) NSString *eventIdentifier;
+@property (nonatomic, copy) NSString *eventName;
 @property (nonatomic, assign) NSInteger repeatCount;
 @property (nonatomic, copy) NSDate *validFrom;
 @property (nonatomic, copy) NSDate *expiresAt;
