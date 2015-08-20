@@ -9,9 +9,15 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSInteger, BCZoneScope) {
-    BCZoneScopeSitewide,
-    BCZoneScopeOneCategory,
-    BCZoneScopeAcrossCategories
+    BCZoneScopeAllBeaconsInSite,
+    BCZoneScopeAllBeaconsInCategory,
+    BCZoneScopeAllBeaconsWithZoneIdentifierCustomValue
+};
+
+typedef NS_ENUM(NSInteger, BCZoneState) {
+    BCZoneStateUnknown,
+    BCZoneStateInside,
+    BCZoneStateOutside
 };
 
 @class BCSite;
@@ -19,8 +25,17 @@ typedef NS_ENUM(NSInteger, BCZoneScope) {
 @interface BCZone : NSObject
 
 @property (nonatomic, copy) NSString *identifier;
+@property (nonatomic, assign) BCZoneState zoneState;
 @property (nonatomic, assign) BCZoneScope zoneScope;
-@property (nonatomic, assign) BOOL shouldPrefixLocationEventIdWithSiteName;
 @property (nonatomic, copy) BCSite* site;
+@property (nonatomic, strong) NSDate* enteredZoneAt;
+@property (nonatomic, strong) NSDate* reenteredZoneAt;
+@property (nonatomic, strong) NSDate* exitedZoneAt;
+@property (nonatomic, strong) NSDate* lastRangedBeaconsInZoneAt;
+@property (nonatomic, assign) NSInteger entryCount;
+
+@property (nonatomic, assign) BOOL shouldPrefixLocationEventIdWithSiteName;
+
+- (NSDate *) lastEntered;
 
 @end

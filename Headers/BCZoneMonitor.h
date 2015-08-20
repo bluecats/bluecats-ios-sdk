@@ -31,6 +31,7 @@
 
 @optional
 - (void)zoneMonitor:(BCZoneMonitor *)monitor didEnterZone:(BCZone *)zone;
+- (void)zoneMonitor:(BCZoneMonitor *)monitor didReEnterZone:(BCZone *)zone;
 - (void)zoneMonitor:(BCZoneMonitor *)monitor didRangeBeacons:(NSArray *)beacons inZone:(BCZone *)zone;
 - (void)zoneMonitor:(BCZoneMonitor *)monitor didDwellInZone:(BCZone *)zone forTimeInterval:(NSTimeInterval)dwellTimeInterval;
 - (void)zoneMonitor:(BCZoneMonitor *)monitor didExitZone:(BCZone *)zone;
