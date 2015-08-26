@@ -34,8 +34,6 @@ typedef NS_ENUM(NSInteger, BCZoneState) {
 @property (nonatomic, strong) NSDate* lastRangedBeaconsInZoneAt;
 @property (nonatomic, assign) NSInteger entryCount;
 
-@property (nonatomic, assign) BOOL shouldPrefixLocationEventIdWithSiteName;
-
 - (NSDate *) lastEntered;
 
 @end

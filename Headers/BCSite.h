@@ -9,6 +9,7 @@
 #import "BCJSONModel.h"
 #import "BCBeaconDataSource.h"
 #import "BCCategoryDataSource.h"
+#import "BCJSONModel+BCCustomValueDataSource.h"
 
 typedef enum {
     BCSiteStateUnknown = 0,
@@ -18,7 +19,7 @@ typedef enum {
 
 @class CLLocation, BCAddress, BCSiteAccessType, BCSiteType;
 
-@interface BCSite : BCJSONModel<NSCopying, BCBeaconDataSource, BCCategoryDataSource>
+@interface BCSite : BCJSONModel<NSCopying, BCBeaconDataSource, BCCategoryDataSource, BCCustomValueDataSource>
 
 @property (nonatomic, copy) NSString *teamID;
 @property (nonatomic, assign) NSInteger beaconCount;

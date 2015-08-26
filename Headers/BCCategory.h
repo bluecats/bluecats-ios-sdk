@@ -7,7 +7,7 @@
 //
 
 #import "BCJSONModel.h"
-#import "BCCategoryDataSource.h"
+#import "BCJSONModel+BCCustomValueDataSource.h"
 
 typedef enum BCCategoryType {
     BCCategoryTypeUnknown = 0,
