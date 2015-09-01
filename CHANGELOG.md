@@ -14,7 +14,7 @@
 ### Version 0.3.2 (September 29, 2014)
   - iOS 8.0 Support
 
-### Version 0.3.4
+### Version 0.3.4 (November 5, 2014)
   - Secure mode performance and stability updates
 
 ### Version 0.4.0 (December 5, 2014)
@@ -25,3 +25,13 @@
 
 ### Version 0.4.2 (March 3, 2015)
   - Background secure mode performance improvements
+
+### Version 0.5.0 (March 5, 2015)
+  - Performance and stability improvements for visit tracking in background
+  - Added option to disable scanning in background
+  - Support querying local storage for visit history
+  
+### Version 0.6.0 (August 26, 2015)
+  - Added zone monitor classes
+  - Optimized event processing
+  - Updated event filters
