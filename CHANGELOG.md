@@ -1,15 +1,23 @@
-## Version 0.0.2 (July 23, 2013)
+
+  
+### Version 0.0.1 (March 12, 2013)
+
+### Version 0.0.2 (July 23, 2013)
 
 ##### Updates to the BlueCats SDK
   - Added support for Markers
 
 #### Distribution and Documentation Updates
   - Added BlueCats Sample Application
-  
-### Version 0.0.1 (March 12, 2013)
 
-### Version 0.1.1 (March 12, 2014)
+### Version 0.1.1 (January 28, 2014)
   - Improved support for background scanning and notifications
+
+### Version 0.1.4 (April 29, 2014)
+ - Updates to local notification scheduling via the SDK to make it more flexible. When scheduling a local notification via the SDK:
+    - Site is optional, so a notification can be scheduled to trigger in any site
+    - Categories are matched by name
+    - Notification will trigger in a requested proximity, or closer. For example a notification for 'Far' proximity will trigger in Immediate, Near or Far proximities. This improves reliability of notifications being triggered successfully when an app is in the background.
 
 ### Version 0.3.2 (September 29, 2014)
   - iOS 8.0 Support
@@ -38,3 +46,7 @@
   - Additional and updated event filters
   - Optimized event processing
   - Performance and stability improvements
+   
+### Version 0.6.2 (September 1, 2015)
+  - Fixed reassemble block data
+  - Added ignore case option when finding custom value by key
