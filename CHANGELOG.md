@@ -32,6 +32,9 @@
   - Support querying local storage for visit history
   
 ### Version 0.6.0 (August 26, 2015)
-  - Added zone monitor classes
+  - Zone monitoring and the [BlueCats-OtherLevels iOS SDK extension](https://github.com/bluecats/bluecats-otherlevels-ios-sdkext) introduced to support the OtherLevels platform
+  - Beacon network access control
+  - Lasso integration
+  - Additional and updated event filters
   - Optimized event processing
-  - Updated event filters
+  - Performance and stability improvements
