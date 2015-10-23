@@ -8,6 +8,7 @@
 
 #import "BCJSONModel.h"
 #import "BCJSONModel+BCCustomValueDataSource.h"
+#import "BCDefinitions.h"
 
 typedef enum {
 	BCProximityUnknown = 0,
@@ -34,21 +35,6 @@ typedef enum {
     BCVerificationStatusVerifiedViaBlueCatsIBeaconAd,
     BCVerificationStatusVerifiedViaBueCatsSecureAd
 } BCVerificationStatus;
-
-typedef enum {
-    //No relevant request has been made to the server
-    BCSyncStatusNotSynced = 0,
-    //Relevant request has been made to the server and this beacon was not included
-    BCSyncStatusUnauthorized,
-    //Basic access information has been synced
-    BCSyncStatusAccessSynced,
-    //Full data has been synced
-    BCSyncStatusSynced,
-    //Data has been restored from local DB
-    BCSyncStatusRestored,
-    //Whatever data has been synced for this beacon is now stale
-    BCSyncStatusExpired
-} BCSyncStatus;
 
 typedef enum {
     BCBlockDataEncodingNone = 0,

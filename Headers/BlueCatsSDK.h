@@ -63,6 +63,7 @@ extern NSString * const BCOptionCrowdSourceBeaconUpdates;
 extern NSString * const BCOptionUseLocalStorage;
 extern NSString * const BCOptionCacheAllBeaconsForApp;
 extern NSString * const BCOptionDiscoverBeaconsNearby;
+extern NSString * const BCOptionCacheSitesNearbyByLocation;
 extern NSString * const BCOptionCacheRefreshTimeIntervalInSeconds;
 extern NSString * const BCOptionShowBluetoothPowerWarningMessage;
 extern NSString * const BCOptionAutoTrackStandardEvents;

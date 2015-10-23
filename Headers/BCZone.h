@@ -1,6 +1,6 @@
 //
 //  BCZone.h
-//  BCOtherCats
+//  BlueCatsSDK
 //
 //  Created by Cody Singleton on 8/19/15.
 //  Copyright (c) 2015 bluecats. All rights reserved.

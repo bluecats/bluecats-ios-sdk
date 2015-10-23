@@ -10,6 +10,7 @@
 #import "BCBeaconDataSource.h"
 #import "BCCategoryDataSource.h"
 #import "BCJSONModel+BCCustomValueDataSource.h"
+#import "BCDefinitions.h"
 
 typedef enum {
     BCSiteStateUnknown = 0,
@@ -21,22 +22,24 @@ typedef enum {
 
 @interface BCSite : BCJSONModel<NSCopying, BCBeaconDataSource, BCCategoryDataSource, BCCustomValueDataSource>
 
+@property (nonatomic, copy) NSString *siteID;
+@property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *teamID;
-@property (nonatomic, assign) NSInteger beaconCount;
 @property (nonatomic, strong) BCSiteAccessType *siteAccessType;
+@property (nonatomic, strong) BCAddress *address;
+@property (nonatomic, copy) NSString *notes;
+@property (nonatomic, assign) NSInteger beaconCount;
 @property (nonatomic, copy) NSDate *createdAt;
 @property (nonatomic, copy) NSDate *modifiedAt;
 
-@property (nonatomic, copy) NSDate *syncedAt;
-@property (nonatomic, assign, readonly) BOOL synced;
-@property (nonatomic, copy) NSDate *cachedAt;
-@property (nonatomic, copy) NSString *siteID;
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *greeting;
-@property (nonatomic, strong) BCAddress *address;
 @property (nonatomic, copy) NSArray *maps;
 @property (nonatomic, copy) NSArray *customValues;
 
+@property (nonatomic, copy) NSDate *cachedAt;
+@property (nonatomic, copy) NSDate *syncedAt;
+@property (nonatomic, assign) BCSyncStatus syncStatus;
+
+- (BOOL)syncedOrRestored;
 - (void)copyApiPropertiesFromSite:(BCSite *)site;
 
 @property (nonatomic, copy) NSDate *cachedCategoriesAt;

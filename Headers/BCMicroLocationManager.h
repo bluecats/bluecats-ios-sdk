@@ -15,7 +15,7 @@
 
 @interface BCMicroLocationManager : NSObject
 
-@property (nonatomic, assign) NSObject<BCMicroLocationManagerDelegate> *delegate;
+@property (nonatomic, weak) NSObject<BCMicroLocationManagerDelegate> *delegate;
 
 @property (readonly, nonatomic) NSOrderedSet *nearbySites;
 @property (nonatomic, assign) double distanceFilter;

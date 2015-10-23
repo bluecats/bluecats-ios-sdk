@@ -22,7 +22,7 @@ typedef enum {
 
 @interface BCEventManager : NSObject
 
-@property (nonatomic, assign) NSObject<BCEventManagerDelegate> *delegate;
+@property (nonatomic, weak) NSObject<BCEventManagerDelegate> *delegate;
 @property (nonatomic, strong) NSString* defaultCustomDeviceIdentifier;
 
 - (NSArray *) allMonitoredEventIdentifiers;
