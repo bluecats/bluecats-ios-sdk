@@ -102,11 +102,3 @@ typedef NS_ENUM(NSUInteger, LassoValueType) {
     LassoValueTypeFunction                = 0x04
 };
 
-/*
- TODO: Remove Before Build For GitHub
- */
-
-LassoTransactionType BCKLassoTransactionTypeForKey(NSString *key);
-NSString * BCKLassoValueTypeKeyForEnum(LassoValueType valueType);
-NSDictionary * BCKLassoParseData(NSData *data);
-
