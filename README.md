@@ -3,7 +3,7 @@ BlueCats SDK for iOS
 
 The BlueCats' SDKs have been developed for easy integration and to offer flexiblity across different use cases.  Please let us know if you have any questions at developers@bluecats.com.
 
-###**The BlueCats iOS SDK documentation is located [here](https://github.com/bluecats/bluecats-ios-sdk/wiki).**
+**See the [BlueCats Developer Portal](https://developer.bluecats.com) for SDK documentaiton and getting started guides.**
 
 Need some beacons?  Check out the [store](http://store.bluecats.com/collections/featured-products/products/bluecats-starterpack-with-usb) for a StarterPack or email our [sales team](mailto:sales@bluecats.com).
 
