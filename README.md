@@ -29,8 +29,7 @@ $ pod update
 ```
 
 ## Have a Question?
-
-* If you've found a bug, open an issue.
-* If you have a general question, please see our [support center](support.bluecats.com) for articles on our platform and beacons.
-* If you want a particular feature, open an issue.
-* If taking a look at our SDK for the first time, please see our [iOS SDK documentation](https://github.com/bluecats/bluecats-ios-sdk/wiki).
+* If you've found a bug, [open an issue](https://github.com/bluecats/bluecats-ios-sdk/issues).
+* If you have a general question, please see our [developer portal](https://developer.bluecats.com) and [support center](support.bluecats.com) for articles on our platform and beacons.
+* If you want a particular feature, [open an issue](https://github.com/bluecats/bluecats-ios-sdk/issues).
+* If taking a look at our SDK for the first time, please see our [iOS SDK documentation](https://developer.bluecats.com).
