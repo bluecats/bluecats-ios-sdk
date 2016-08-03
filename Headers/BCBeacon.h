@@ -7,233 +7,148 @@
 //
 
 #import "BCJSONModel.h"
-#import "BCJSONModel+BCCustomValueDataSource.h"
 #import "BCDefinitions.h"
 
-typedef enum {
-	BCProximityUnknown = 0,
-	BCProximityImmediate,
-	BCProximityNear,
-	BCProximityFar
-} BCProximity;
+@class BCMapPoint, BCBatteryStatus, BCEddystone, BCSite, BCTemperatureData, BCBeaconLoudness, BCBeaconMode, BCTargetSpeed, BCBeaconRegion;
 
-typedef enum {
-    BCBlueCatsAdDataTypeUnknown = 0,
-    BCBlueCatsAdDataTypeSphynx1 = 1,
-    BCBlueCatsAdDataTypeIBeacon2 = 2,
-    BCBlueCatsAdDataTypeIBeacon3 = 3,
-    BCBlueCatsAdDataTypeSecure1 = 4,
-    BCBlueCatsAdDataTypeIBeacon4 = 5,
-    BCBlueCatsAdDataTypeSecure2 = 6,
-    BCBlueCatsAdDataTypeData1 = 7,
-    BCBlueCatsAdDataTypeData2 = 8
-} BCBlueCatsAdDataType;
+///The `BCBeacon` class defines an object that represents a beacon.
+@interface BCBeacon : BCJSONModel <NSCopying>
 
-typedef enum {
-    BCVerificationStatusNotVerified = 0,
-    BCVerificationStatusDetectedAttack,
-    BCVerificationStatusVerifiedViaBlueCatsIBeaconAd,
-    BCVerificationStatusVerifiedViaBueCatsSecureAd
-} BCVerificationStatus;
+///@name Beacon Properties
 
-typedef enum {
-    BCBlockDataEncodingNone = 0,
-    BCBlockDataEncodingUTF8,
-    BCBlockDataEncodingJSON
-} BCBlockDataEncoding;
-
-typedef enum {
-    BCBlockDataTypeCustom = 0,
-    BCBlockDataTypeTemperature = 15
-} BCBlockDataType;
-
-typedef enum {
-    BCBeaconEndpointUSBHost = 0
-} BCBeaconEndpoint;
-
-typedef enum {
-    BCBeaconOwnershipUnknown = 0,
-    BCBeaconOwnershipOwned = 1,
-    BCBeaconOwnershipShared = 2,
-    BCBeaconOwnershipPublic = 3
-} BCBeaconOwnership;
-
-typedef enum {
-    BCBeaconAccessRoleVisitTracker = 1,
-    BCBeaconAccessRoleBeaconRanger = 2,
-    BCBeaconAccessRoleSettingsUpdater = 3
-} BCBeaconAccessRole;
-
-
-@class BCBatteryStatus, BCBeaconLoudness, BCTargetSpeed, BCMapPoint, BCBeaconRegion, BCBeaconMode, BCBeaconVersion, BCBeaconVisit, BCNetworkAccess,BCNetworkAccessRole,BCNetworkAccessOwnership;
-
-@interface BCBeacon : BCJSONModel <NSCopying, BCCustomValueDataSource>
-
-// BlueCats Api properties
+///The object id.
 @property (nonatomic, copy) NSString *beaconID;
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *teamID;
-@property (nonatomic, copy) NSString *siteID;
-@property (nonatomic, copy) NSString *siteName;
-@property (nonatomic, copy) NSString *bluetoothAddress;
-@property (nonatomic, copy) NSNumber *measuredPowerAt1Meter;
-@property (nonatomic, copy) NSString *firmwareVersion;
-@property (nonatomic, copy) NSString *latestFirmwareVersion;
-@property (nonatomic, copy) NSNumber *privacyDuration;
-@property (nonatomic, copy) NSString *modelNumber;
+///The serial number of the beacon.  This is the preferred unique beacon identifier.
 @property (nonatomic, copy) NSString *serialNumber;
-@property (nonatomic, assign) BOOL upgradableOTA;
-@property (nonatomic, copy) NSNumber *version;
-@property (nonatomic, copy) NSNumber *pendingVersion;
-@property (nonatomic, copy) NSDate *createdAt;
-@property (nonatomic, copy) NSDate *modifiedAt;
-@property (nonatomic, copy) BCBeaconRegion *beaconRegion;
-@property (nonatomic, copy) BCBeaconMode *beaconMode;
-@property (nonatomic, copy) BCBatteryStatus *batteryStatus;
-@property (nonatomic, copy) NSNumber *lastKnownBatteryLevel;
-@property (nonatomic, copy) BCBeaconLoudness *beaconLoudness;
-@property (nonatomic, copy) BCTargetSpeed *targetSpeed;
-@property (nonatomic, copy) BCMapPoint *mapPoint;
-@property (nonatomic, copy) BCNetworkAccess *networkAccess;
-@property (nonatomic, strong) NSArray *categories;
-@property (nonatomic, strong) NSArray *customValues;
-
-// CoreBluetooth properties
-@property (nonatomic, copy) NSUUID *peripheralIdentifier;
-@property (nonatomic, copy) NSDate *firstDiscoveredAt;
-@property (nonatomic, copy) NSDate *lastDiscoveredAt;
-@property (nonatomic, assign, readonly) BOOL discovered;
-
-// iBeacon properties
-@property (nonatomic, copy) NSString *proximityUUIDString;
-@property (nonatomic, copy) NSNumber *major;
-@property (nonatomic, copy) NSNumber *minor;
+///The model number of the beacon.  I.e. BC303-A -> AA, BC202-A -> USB.
+@property (nonatomic, copy) NSString *modelNumber;
+///The name of the beacon.  This can be used to organize your beacons by color or room for example.
+@property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSDate *lastRangedAt;
-@property (nonatomic, copy) NSDate *firstRangedAt;
+@property (nonatomic, copy) NSString *wireframeURLString;
+///@name iBeacon Properties
 
-// BeaconManager properties
-@property (nonatomic, copy) NSDate *cachedAt;
-@property (nonatomic, copy) NSDate *syncedAt;
-@property (nonatomic, assign) BCSyncStatus syncStatus;
-@property (nonatomic, assign, readonly) BOOL synced;
-@property (nonatomic, copy, readonly) NSString *iBeaconKey;
+///The Proximity UUID of the beacon.
+@property (nonatomic, copy) NSString *proximityUUIDString;
+///The major value of the beacon.
+@property (nonatomic, copy) NSNumber *major;
+///The minor value of the beacon.
+@property (nonatomic, copy) NSNumber *minor;
 
-// Proximity Properties
+///@name Eddystone Properties
+
+///The Eddystone properties of the beacon such as namespace and URL.
+@property (nonatomic, copy) BCEddystone *eddystone;
+@property (nonatomic, copy) NSNumber *uptime;
+
+///@name Proximity Properties
 @property (nonatomic, assign) double accuracy;
+///The received signal strength indication of the beacon. Reasonable values range from -40 dBm at the highest to -110 dBm at the lowest.
 @property (nonatomic, copy) NSNumber *rssi;
+///The BCProximity value of the beacon.
 @property (nonatomic, assign) BCProximity proximity;
 
-@property (nonatomic, copy) NSDate *verifiedAt;
-@property (nonatomic, assign) BCVerificationStatus verificationStatus;
+///@name Versioned properties
 
-- (NSNumber *)averageAdsPerMinuteForAdDataType:(NSString *)adDataTypeKey;
-- (void)removeAllAdData;
-- (void)removeAdDataForAdDataTypeKey:(NSString *)adDataTypeKey;
-- (void)setAdData:(NSDictionary *)adData forAdDataTypeKey:(NSString *)adDataTypeKey;
-- (NSDictionary *)adDataForAdDataTypeKey:(NSString *)adDataTypeKey;
-- (id)objectFromBlueCatsAdDataForKey:(NSString *)key;
+///The advertising mode of the beacon, such as iBeacon or BlueCats Secure
+@property (nonatomic, copy) BCBeaconMode *beaconMode;
+///The beacon loundess / range
+@property (nonatomic, copy) BCBeaconLoudness *beaconLoudness;
+///The beacon advertisment frequency
+@property (nonatomic, copy) BCTargetSpeed *targetSpeed;
+///Version number for the current settings
+@property (nonatomic, copy) NSNumber *version;
+///Version number for settings not yet applied to the beacon. Will be nil if the settings are up to date.
+@property (nonatomic, copy) NSNumber *pendingVersion;
 
-- (NSArray *)reassembledBlockDataWithDataType:(BCBlockDataType)dataType;
-- (NSDictionary *)lastReassembledBlockDataWithDataType:(BCBlockDataType)dataType;
+///@name Firmware properties
 
-- (void)requestDataArrayFromBeaconEndpoint:(BCBeaconEndpoint)endpoint
-                             withDataArray:(NSArray *)requestDataArray
-                                   success:(void (^)(NSArray *responseDataArray))success
-                                    status:(void (^)(NSString *status))status
-                                   failure:(void (^)(NSError *error))failure;
+///The current firmware version of the beacon
+@property (nonatomic, copy) NSString *firmwareVersion;
 
-- (void)numberOfVisitsTodayWithSuccess:(void (^)(NSUInteger visitCount))success
-                               failure:(void (^)(NSError *error))failure;
+///@name Context Properties
 
-- (void)numberOfVisitsYesterdayWithSuccess:(void (^)(NSUInteger visitCount))success
-                                   failure:(void (^)(NSError *error))failure;
+///An array of BCCategories that have been applied to the beacon.
+@property (nonatomic, copy) NSArray *categories;
+///A dictionary containing the beacon's custom values.
+@property (nonatomic, copy, readonly) NSDictionary *customValueForKey;
+///The beacon's map point if placed on a map.
+@property (nonatomic, copy) BCMapPoint *mapPoint;
 
-- (void)numberOfVisitsThisWeekWithSuccess:(void (^)(NSUInteger visitCount))success
-                                  failure:(void (^)(NSError *error))failure;
+///@name Beacon Health Properties
 
-- (void)numberOfVisitsLastWeekWithSuccess:(void (^)(NSUInteger visitCount))success
-                                  failure:(void (^)(NSError *error))failure;
+///The battery status of the beacon.  Alive: 100% - 25%, Warning: 25% - 10%, Critical: <10%.
+@property (nonatomic, copy) BCBatteryStatus *batteryStatus;
+///The last known battery level of the beacon.
+@property (nonatomic, copy) NSNumber *lastKnownBatteryLevel;
 
-- (void)numberOfVisitsThisMonthWithSuccess:(void (^)(NSUInteger visitCount))success
-                                   failure:(void (^)(NSError *error))failure;
+///@name Organizational Properties
 
-- (void)numberOfVisitsLastMonthWithSuccess:(void (^)(NSUInteger visitCount))success
-                                   failure:(void (^)(NSError *error))failure;
+///The ID of the team the beacon is within.
+@property (nonatomic, copy) NSString *teamID;
+@property (nonatomic, copy) BCSite *site;
+@property (nonatomic, copy) NSString *siteID;
+@property (nonatomic, copy) NSString *siteName;
 
-- (void)numberOfVisitsSinceDate:(NSDate *)date
-                        success:(void (^)(NSUInteger visitCount))success
-                        failure:(void (^)(NSError *error))failure;
+@property(nonatomic, copy) BCTemperatureData * temperatureData;
 
-- (void)numberOfVisitsUntilDate:(NSDate *)date
-                        success:(void (^)(NSUInteger visitCount))success
-                        failure:(void (^)(NSError *error))failure;
+- (BOOL)isNewborn;
+- (BOOL)isIBeacon;
+- (BOOL)isEddystone;
+- (BOOL)isBlueCat;
+- (BOOL)isSecure;
 
-- (void)numberOfVisitsFromDate:(NSDate *)startDate untilDate:(NSDate *)endDate
-                       success:(void (^)(NSUInteger visitCount))success
-                       failure:(void (^)(NSError *error))failure;
+- (BOOL)hasDiscoveredEddystoneUIDFrame;
+- (BOOL)hasDiscoveredEddystoneURLFrame;
+- (BOOL)hasDiscoveredEddystoneTelemetryFrame;
 
-+ (void)storedBeaconsWithPredicate:(NSPredicate *)predicate sortDescriptors:(NSArray *)sortDesc
-                           success:(void (^)(NSArray *beacons))success
-                           failure:(void (^)(NSError *error))failure;
+- (NSString *)localName;
+- (NSString *)cacheIdentifier;
 
-+ (void)numberOfBeaconsWithPredicate:(NSPredicate *)predicate
-                             success:(void (^)(NSUInteger count))success
-                             failure:(void (^)(NSError *error))failure;
+
+
+///@name Requesting Data from a Beacon Endpoint
+/**
+ *  Issues an asynchronous request for data from a beacon endpoint with the specified response data array and success, status and failure blocks.
+ *
+ *  @param endpoint         Type of beacon endpoint.
+ *  @param requestDataArray Request parameters.
+ *  @param success          The block object to be executed when the request operation finishes successfully.
+ *
+ *  The block has no return value and takes one argument:
+ *
+ *  `responseDataArray` | The response data array.
+ *
+ *  @param status           The block object to be executed while the operation is completing.
+ *
+ *  The block has no return value and takes one argument:
+ *
+ *  `status` | The operation status.
+ *
+ *  @param failure          The block object to be executed when the task finishes unsuccessfully.
+ *
+ *  The block has no return value and takes one argument:
+ *
+ *  `error` | The error.
+ */
+
+- (void)sendDataRequest:(NSData *)requestData
+       toBeaconEndpoint:(BCBeaconEndpoint)endpoint
+                success:(void (^)(NSData *responseData))success
+                 status:(void (^)(NSString *status))status
+                failure:(void (^)(NSError *error))failure;
+
+- (void)sendDataRequests:(NSArray *)requestDataArray
+        toBeaconEndpoint:(BCBeaconEndpoint)endpoint
+                 success:(void (^)(NSArray *responseDataArray))success
+                  status:(void (^)(NSString *status))status
+                 failure:(void (^)(NSError *error))failure;
+
+- (void)transportDataRequest:(NSData *)requestData
+            toBeaconEndpoint:(BCBeaconEndpoint)endpoint
+                     success:(void (^)(NSData *responseData))success
+                      status:(void (^)(NSString *status))status
+                     failure:(void (^)(NSError *error))failure;
 
 @end
-
-extern NSString * const BCFirmwareVersion002;
-extern NSString * const BCFirmwareVersion010;
-extern NSString * const BCFirmwareVersion011;
-extern NSString * const BCFirmwareVersion020;
-extern NSString * const BCFirmwareVersion030;
-extern NSString * const BCFirmwareVersion031;
-extern NSString * const BCFirmwareVersion040;
-extern NSString * const BCFirmwareVersion041;
-extern NSString * const BCFirmwareVersion050;
-extern NSString * const BCFirmwareVersion051;
-extern NSString * const BCFirmwareVersion052;
-
-extern NSString * const BCAdDataTypeKey;
-extern NSString * const BCAdDataTypeAppleIBeaconKey;
-extern NSString * const BCAdDataTypeBlueCatsSphynxKey;
-extern NSString * const BCAdDataTypeBlueCatsIBeaconKey;
-extern NSString * const BCAdDataTypeBlueCatsSecureKey;
-extern NSString * const BCAdDataTypeBlueCatsBlockDataKey;
-extern NSString * const BCAdDataTimestampKey;
-extern NSString * const BCAdDataFirstDiscoveredAtKey;
-extern NSString * const BCAdDataDiscoveredCountKey;
-extern NSString * const BCAdDataDiscoveredPerMinuteKey;
-
-extern NSString * const BCBlueCatsAdDataBeaconModeIDKey;
-extern NSString * const BCBlueCatsAdDataVersionKey;
-extern NSString * const BCBlueCatsAdDataTypeKey;
-extern NSString * const BCBlueCatsAdDataProximityUUIDStringKey;
-extern NSString * const BCBlueCatsAdDataBluetoothAddressStringKey;
-extern NSString * const BCBlueCatsAdDataMajorKey;
-extern NSString * const BCBlueCatsAdDataMinorKey;
-extern NSString * const BCBlueCatsAdDataFirmwareVersionKey;
-extern NSString * const BCBlueCatsAdDataModelNumberKey;
-extern NSString * const BCBlueCatsAdDataBatteryLevelKey;
-extern NSString * const BCBlueCatsAdDataTxPowerLevelKey;
-extern NSString * const BCBlueCatsAdDataMeasuredPowerAt1MeterKey;
-extern NSString * const BCBlueCatsAdDataBeaconLoudnessLevelKey;
-extern NSString * const BCBlueCatsAdDataTargetSpeedInMillisecondsKey;
-extern NSString * const BCBlueCatsAdDataSequenceNumberKey;
-
-extern NSString * const BCBlueCatsBlockDataIdentifierKey;
-extern NSString * const BCBlueCatsBlockDataTypeKey;
-extern NSString * const BCBlueCatsBlockDataEncodingKey;
-extern NSString * const BCBlueCatsBlockDataCountKey;
-extern NSString * const BCBlueCatsBlockDataIndexKey;
-extern NSString * const BCBlueCatsBlockDataLengthKey;
-extern NSString * const BCBlueCatsBlockDataKey;
-extern NSString * const BCBlueCatsIndexedBlockDataKey;
-extern NSString * const BCBlueCatsBlockDataReassembledAtKey;
-
-extern NSString * const BCAppleIBeaconAdDataProximityUUIDStringKey;
-extern NSString * const BCAppleIBeaconAdDataMajorKey;
-extern NSString * const BCAppleIBeaconAdDataMinorKey;
-extern NSString * const BCAppleIBeaconAdDataMeasuredPowerAt1MeterKey;
-
 

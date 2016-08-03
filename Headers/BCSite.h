@@ -7,58 +7,42 @@
 //
 
 #import "BCJSONModel.h"
-#import "BCBeaconDataSource.h"
-#import "BCCategoryDataSource.h"
-#import "BCJSONModel+BCCustomValueDataSource.h"
 #import "BCDefinitions.h"
 
-typedef enum {
-    BCSiteStateUnknown = 0,
-    BCSiteStateInside,
-    BCSiteStateOutside,
-} BCSiteState;
+@class CLLocation, BCAddress, BCSiteAccessType;
 
-@class CLLocation, BCAddress, BCSiteAccessType, BCSiteType;
+///The `BCSite` class defines an object representing a BlueCats site.
+@interface BCSite : BCJSONModel <NSCopying>
 
-@interface BCSite : BCJSONModel<NSCopying, BCBeaconDataSource, BCCategoryDataSource, BCCustomValueDataSource>
+///@name Site Properties
 
+///The resource ID.
 @property (nonatomic, copy) NSString *siteID;
+///The site name.
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *teamID;
+///The site access type.
 @property (nonatomic, strong) BCSiteAccessType *siteAccessType;
+
+///@name Location Properties
+
+///The site address.
 @property (nonatomic, strong) BCAddress *address;
-@property (nonatomic, copy) NSString *notes;
-@property (nonatomic, assign) NSInteger beaconCount;
-@property (nonatomic, copy) NSDate *createdAt;
-@property (nonatomic, copy) NSDate *modifiedAt;
-
-@property (nonatomic, copy) NSArray *maps;
-@property (nonatomic, copy) NSArray *customValues;
-
-@property (nonatomic, copy) NSDate *cachedAt;
-@property (nonatomic, copy) NSDate *syncedAt;
-@property (nonatomic, assign) BCSyncStatus syncStatus;
-
-- (BOOL)syncedOrRestored;
-- (void)copyApiPropertiesFromSite:(BCSite *)site;
-
-@property (nonatomic, copy) NSDate *cachedCategoriesAt;
-@property (nonatomic, copy) NSArray *cachedCategories;
-
-- (BOOL)hasCategoriesCacheExpired;
-
-- (void)getCategoriesWithSuccess:(void (^)(NSArray *))success
-                         failure:(void (^)(NSError *))failure
-                    preferCached:(BOOL)preferCached;
-
+/**
+ *  Returns a `CLLocation` object from the site information.
+ *
+ *  @return A `CLLocation` object.
+ */
 - (CLLocation *)location;
 
-@property (nonatomic, copy) NSDate *cachedBeaconsAt;
+///@name Map Properties
 
-- (NSArray *)cachedBeacons;
-- (BOOL)hasBeaconsCacheExpired;
-- (void)getBeaconsWithSuccess:(void (^)(NSArray *))success
-                      failure:(void (^)(NSError *))failure
-                 preferCached:(BOOL)preferCached;
+///The array of `BCMaps` assigned to the site.
+@property (nonatomic, copy) NSArray *maps;
+///The dictionary containing the site's custom values.
+@property (nonatomic, copy, readonly) NSDictionary *customValueForKey;
+
+///@name Organizational Properties
+///The resource ID of the team the site is within.
+@property (nonatomic, copy) NSString *teamID;
 
 @end

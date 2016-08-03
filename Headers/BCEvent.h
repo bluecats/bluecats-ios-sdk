@@ -9,41 +9,19 @@
 #import "BCJSONModel.h"
 #import <Foundation/Foundation.h>
 
+///The `BCEvent` class defines an object that represents an event that satisifed the `BCEventFilters` of a `BCTrigger`.
 @interface BCEvent : BCJSONModel<NSCopying>
 
+///@name Event Properties
+
+///Unique identifier for the event.
 @property (nonatomic, copy) NSString *eventID;
+///The event identifier set set on creation.
 @property (nonatomic, copy) NSString *eventIdentifier;
+///The event name.
 @property (nonatomic, copy) NSString *eventName;
-@property (nonatomic, copy) NSString *deviceUUID;
-@property (nonatomic, copy) NSString *sessionUUID;
-@property (nonatomic, copy) NSString *customDeviceIdentifier;
-@property (nonatomic, copy) NSString *siteID;
-@property (nonatomic, copy) NSString *siteName;
-@property (nonatomic, copy) NSString *beaconID;
-@property (nonatomic, copy) NSString *beaconName;
-@property (nonatomic, copy) NSString *categoryID;
-@property (nonatomic, copy) NSString *categoryName;
+///The date the event began.
 @property (nonatomic, copy) NSDate *beganAt;
+///The date the event ended.
 @property (nonatomic, copy) NSDate *endedAt;
-@property (nonatomic, copy) NSNumber *rssi;
-@property (nonatomic, copy) NSNumber *accuracy;
-@property (nonatomic, copy) NSString *mapID;
-@property (nonatomic, copy) NSNumber *mapX;
-@property (nonatomic, copy) NSNumber *mapY;
-@property (nonatomic, copy) NSString *value1;
-@property (nonatomic, copy) NSString *value2;
-@property (nonatomic, copy) NSString *value3;
-@property (nonatomic, assign) NSNumber* beganInBackground;
-@property (nonatomic, assign) NSNumber* endedInBackground;
-@property (nonatomic, copy) NSDate* lastPostedAt;
-
-+ (void)storedEventsWithPredicate:(NSPredicate *)predicate
-                  sortDescriptors:(NSArray *)sortDesc
-                          success:(void (^)(NSArray *visits))success
-                          failure:(void (^)(NSError *error))failure;
-
-+ (void)numberOfEventsWithPredicate:(NSPredicate *)predicate
-                            success:(void (^)(NSUInteger visitCount))success
-                            failure:(void (^)(NSError *error))failure;
-
 @end

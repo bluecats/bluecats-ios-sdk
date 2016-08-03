@@ -7,38 +7,26 @@
 //
 
 #import "BCJSONModel.h"
-#import "BCBeaconDataSource.h"
-
 @class BCPlatformType;
 
-@interface BCApp : BCJSONModel<BCBeaconDataSource>
+///The `BCApp` class defines an object that represents a mobile application.
+@interface BCApp : BCJSONModel
 
+///@name App Properties
+
+///The resource ID.
 @property (nonatomic, copy) NSString *appID;
+///The team ID of the team containing the app.
 @property (nonatomic, copy) NSString *teamID;
+///The name of the app.
 @property (nonatomic, copy) NSString *name;
+///The iTunes URL of the app if provided.
 @property (nonatomic, copy) NSString *iTunesURL;
+///
 @property (nonatomic, copy) NSString *packageName;
+///The app platform type.
 @property (nonatomic, strong) BCPlatformType *platformType;
+///The app icon URL.
 @property (nonatomic, copy) NSString *appIconURL;
-
-- (void)copyApiPropertiesFromApp:(BCApp *)app;
-
-#pragma mark - BCBeaconDataSource
-
-- (NSDate *)cachedBeaconsAt;
-- (NSArray *)cachedBeacons;
-- (BOOL)hasBeaconsCacheExpired;
-
-- (NSDate *)cachedSitesAt;
-- (NSArray *)cachedSites;
-- (BOOL)hasSitesCacheExpired;
-
-- (void)getBeaconsWithSuccess:(void (^)(NSArray *))success
-                      failure:(void (^)(NSError *))failure
-                 preferCached:(BOOL)preferCached;
-
-- (void)getSitesWithSuccess:(void (^)(NSArray *))success
-                      failure:(void (^)(NSError *))failure
-                 preferCached:(BOOL)preferCached;
 
 @end
