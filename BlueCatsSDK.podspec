@@ -1,20 +1,18 @@
 Pod::Spec.new do |s|
   s.name     = 'BlueCatsSDK'
-  s.version  = '2.0.3'
+  s.version  = '2.1.0'
   s.license      = {
     :type => 'Commercial',
     :text => <<-LICENSE
-              All text and design is copyright © 2013-2017 BlueCats Australia Pty Ltd.
-
+              All text and design is copyright © 2013-2019 BlueCats Australia Pty Ltd.
               All rights reserved.
-
               https://bluecats.com/tos/
     LICENSE
   }
   s.summary  = 'BlueCatsSDK for micro-location.'
   s.homepage = 'http://www.bluecats.com'
   s.authors   = { 'BlueCats' => 'theteam@bluecats.com' }
-  s.source   = { :git => 'https://github.com/bluecats/bluecats-ios-sdk.git', :tag => '2.0.3'  }
+  s.source   = { :http => 'https://downloads.apps.bluecats.com/sdks/ios/bluecats-ios-sdk-2.1.0.zip'}
   s.platform = :ios, '8.0'
   s.public_header_files = 'Headers/*.h'
   s.source_files = ['Headers/*.h']

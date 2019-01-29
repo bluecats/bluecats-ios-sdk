@@ -6,25 +6,27 @@
 //  Copyright (c) 2013 Bluecats. All rights reserved.
 //
 
+#if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
 #import <UIKit/UIKit.h>
+#endif
 
 //! Project version number for BlueCatsSDK.
-FOUNDATION_EXPORT double BlueCatsSDKVersionNumber;
+extern double BlueCatsSDKVersionNumber;
 
 //! Project version string for BlueCatsSDK.
-FOUNDATION_EXPORT const unsigned char BlueCatsSDKVersionString[];
+extern const unsigned char BlueCatsSDKVersionString[];
 
 #import "BCAddress.h"
 #import "BCApp.h"
 #import "BCBatteryStatus.h"
 #import "BCBeacon.h"
+#import "BCBeacon+Features.h"
 #import "BCBeaconLoudness.h"
 #import "BCBeaconManager.h"
 #import "BCBeaconMode.h"
 #import "BCBeaconRegion.h"
 #import "BCBeaconVisit.h"
 #import "BCBeacon+Analytics.h"
-#import "BCBeacon+Capabilities.h"
 #import "BCCategory.h"
 #import "BCCategory+Analytics.h"
 #import "BCCustomValue.h"
@@ -41,6 +43,7 @@ FOUNDATION_EXPORT const unsigned char BlueCatsSDKVersionString[];
 #import "BCLocalNotificationManager.h"
 #import "BCMap.h"
 #import "BCMapPoint.h"
+#import "BCMeasurement.h"
 #import "BCMicroLocation.h"
 #import "BCMicroLocationManager.h"
 #import "BCPlatformType.h"
@@ -49,7 +52,6 @@ FOUNDATION_EXPORT const unsigned char BlueCatsSDKVersionString[];
 #import "BCSite.h"
 #import "BCSiteAccessType.h"
 #import "BCTargetSpeed.h"
-#import "BCTemperatureData.h"
 #import "BCTrigger.h"
 #import "BCTriggeredEvent.h"
 #import "BCZone.h"
@@ -102,6 +104,7 @@ extern NSString * const BCOptionApiBaseURL;
 extern NSString * const BCOptionAutoTrackStandardEvents;
 extern NSString * const BCOptionBackgroundSessionTimeIntervalInSeconds;
 extern NSString * const BCOptionCacheAllBeaconsForApp;
+extern NSString * const BCOptionCacheAllBeaconsForSite;
 extern NSString * const BCOptionCacheRefreshTimeIntervalInSeconds;
 extern NSString * const BCOptionCacheSitesNearbyByLocation;
 extern NSString * const BCOptionCrowdSourceBeaconUpdates;
@@ -115,6 +118,7 @@ extern NSString * const BCOptionShowBluetoothPowerWarningMessage;
 extern NSString * const BCOptionTrackBeaconVisits;
 extern NSString * const BCOptionUseEnergySaverScanStrategy;
 extern NSString * const BCOptionUseLocalStorage;
+extern NSString * const BCOptionRunWithoutLocationServicesAuthorization;
 
 // public notifications
 

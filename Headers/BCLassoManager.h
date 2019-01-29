@@ -27,6 +27,18 @@
 - (NSDictionary *)lassoManager:(BCLassoManager *)lassoManager
             dictionaryForLasso:(BCLasso *)lasso;
 
+///@name Getting a Lasso's data request payload
+/**
+ *  Tells the delegate that a payload for the lasso object is present.
+ *
+ *  @param lassoManager The lasso manager object that generated the update event.
+ *  @param lasso        The lasso object.
+ *
+ *  @return The data to send to the `BCLasso` object.
+ */
+- (NSData *)lassoManager:(BCLassoManager *)lassoManager
+     dataRequestForLasso:(BCLasso *)lasso;
+
 ///@name Redemptions
 /**
  *  Tells the delegate that the lasso manager did redeem the specified dictionary for the included lasso object and received the specified response.
@@ -162,7 +174,11 @@ typedef NS_ENUM(NSUInteger, LassoFunctionType) {
     /**
      *  The function is a query.
      */
-    LassoFunctionTypeQuery
+    LassoFunctionTypeQuery,
+    /**
+     *  The function is a redemption.
+     */
+    LassoFunctionTypeMessage,
 };
 
 /**
@@ -197,6 +213,7 @@ typedef NS_ENUM(NSUInteger, LassoValueType) {
     LassoValueTypeDigest                  = 0x29,
     LassoValueTypeResponseCode            = 0x2A,
     LassoValueTypeMessage                 = 0x2B,
-    LassoValueTypeFunction                = 0x04
+    LassoValueTypeFunction                = 0x04,
+    LassoValueTypeSequence                = 0x2C
 };
 

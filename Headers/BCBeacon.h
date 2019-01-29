@@ -8,8 +8,11 @@
 
 #import "BCJSONModel.h"
 #import "BCDefinitions.h"
+#import "BCMeasurement.h"
 
-@class BCMapPoint, BCBatteryStatus, BCEddystone, BCSite, BCTemperatureData, BCBeaconLoudness, BCBeaconMode, BCTargetSpeed, BCBeaconRegion;
+@class BCMapPoint, BCBatteryStatus, BCEddystone, BCSite, BCBeaconLoudness, BCBeaconMode, BCTargetSpeed, BCBeaconRegion;
+
+@protocol BCBeaconDelegate;
 
 ///The `BCBeacon` class defines an object that represents a beacon.
 @interface BCBeacon : BCJSONModel <NSCopying>
@@ -28,6 +31,10 @@
 @property (nonatomic, copy) NSString *wireframeURLString;
 ///@name iBeacon Properties
 
+
+// Identity properties
+@property (nonatomic, copy) NSString *bluetoothAddress;
+
 ///The Proximity UUID of the beacon.
 @property (nonatomic, copy) NSString *proximityUUIDString;
 ///The major value of the beacon.
@@ -39,7 +46,7 @@
 
 ///The Eddystone properties of the beacon such as namespace and URL.
 @property (nonatomic, copy) BCEddystone *eddystone;
-@property (nonatomic, copy) NSNumber *uptime;
+//@property (nonatomic, copy) NSNumber *uptime;
 
 ///@name Proximity Properties
 @property (nonatomic, assign) double accuracy;
@@ -65,6 +72,7 @@
 
 ///The current firmware version of the beacon
 @property (nonatomic, copy) NSString *firmwareVersion;
+@property (nonatomic, copy) NSString *firmwareUID;
 
 ///@name Context Properties
 
@@ -90,47 +98,24 @@
 @property (nonatomic, copy) NSString *siteID;
 @property (nonatomic, copy) NSString *siteName;
 
-@property(nonatomic, copy) BCTemperatureData * temperatureData;
+///@name Raw Beacon Data
+@property (nonatomic, copy) NSData *rawMeasurementData;
 
+//
 - (BOOL)isNewborn;
 - (BOOL)isIBeacon;
 - (BOOL)isEddystone;
 - (BOOL)isBlueCat;
 - (BOOL)isSecure;
+- (BOOL)hasIdentifierData;
 
 - (BOOL)hasDiscoveredEddystoneUIDFrame;
 - (BOOL)hasDiscoveredEddystoneURLFrame;
 - (BOOL)hasDiscoveredEddystoneTelemetryFrame;
 
+- (NSString *)identifierDataString;
 - (NSString *)localName;
 - (NSString *)cacheIdentifier;
-
-
-
-///@name Requesting Data from a Beacon Endpoint
-/**
- *  Issues an asynchronous request for data from a beacon endpoint with the specified response data array and success, status and failure blocks.
- *
- *  @param endpoint         Type of beacon endpoint.
- *  @param requestDataArray Request parameters.
- *  @param success          The block object to be executed when the request operation finishes successfully.
- *
- *  The block has no return value and takes one argument:
- *
- *  `responseDataArray` | The response data array.
- *
- *  @param status           The block object to be executed while the operation is completing.
- *
- *  The block has no return value and takes one argument:
- *
- *  `status` | The operation status.
- *
- *  @param failure          The block object to be executed when the task finishes unsuccessfully.
- *
- *  The block has no return value and takes one argument:
- *
- *  `error` | The error.
- */
 
 - (void)sendDataRequest:(NSData *)requestData
        toBeaconEndpoint:(BCBeaconEndpoint)endpoint
@@ -144,11 +129,28 @@
                   status:(void (^)(NSString *status))status
                  failure:(void (^)(NSError *error))failure;
 
+- (void)sendOpcode:(BCBeaconOpcode)opcode
+           success:(void (^)(void))success
+           failure:(void (^)(NSError *error))failure;
+
+- (void)sendOpcode:(BCBeaconOpcode)opcode
+          withData:(NSData *)data
+           success:(void (^)(void))success
+           failure:(void (^)(NSError *error))failure;
+
 - (void)transportDataRequest:(NSData *)requestData
             toBeaconEndpoint:(BCBeaconEndpoint)endpoint
                      success:(void (^)(NSData *responseData))success
                       status:(void (^)(NSString *status))status
                      failure:(void (^)(NSError *error))failure;
+
+- (void)updateSettingsOffPlatformWithSettings:(NSDictionary *)settingsForKey
+                                      success:(void (^)(void))success
+                                       status:(void (^)(NSString *))status
+                                      failure:(void (^)(NSError *error))failure;
+
+- (NSArray<BCMeasurement *> *) measurementsOfType:(BCMeasurementType)type;
+- (NSArray<NSNumber *> *) availableMeasurementTypes;
 
 @end
 

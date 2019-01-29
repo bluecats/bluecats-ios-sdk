@@ -15,5 +15,6 @@
 @property (nonatomic, copy) NSString *displayName;
 @property (nonatomic, assign) NSInteger level;
 @property (nonatomic, assign) NSInteger measuredPowerAt1Meter;
+@property (nonatomic, assign) NSInteger tiMeasuredPowerAt1Meter;
 
 @end

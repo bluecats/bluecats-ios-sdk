@@ -117,43 +117,38 @@ typedef NS_ENUM(NSUInteger, BCBlueCatsAdDataType) {
     BCBlueCatsAdDataTypeSecure2         = 6,
     BCBlueCatsAdDataTypeData1           = 7,
     BCBlueCatsAdDataTypeData2           = 8,
+    BCBlueCatsAdDataTypeNewborn1        = 0x00,
     BCBlueCatsAdDataTypeEncryptedStatus = 0x09,
-
-    // BlueCatsAdDataTypeFull (Ad Type is WHOLE byte, no mode)
-    /*
-    BCBlueCatsAdDataTypeSecure16 = 0x16,
-    BCBlueCatsAdDataTypeIBeacon01 = 0x01,
-    BCBlueCatsAdDataTypeBC15 = 0x15,
-    BCBlueCatsAdDataTypeData17 = 0x17,
-    BCBlueCatsAdDataTypeFullSecureData = 0x18,
-    BCBlueCatsAdDataTypeFullEndpoint = 0x09,
-    BCBlueCatsAdDataTypeFullSecureEndpoint = 0x0A,
-    */
-
-    BCBlueCatsAdDataTypeNewBorn = 0x00
+    BCBlueCatsAdDataTypeSecure16        = 0x16,
+    BCBlueCatsAdDataTypeData17          = 0x17,
+    BCBlueCatsAdDataTypeFullSecureData  = 0x18,
+    BCBlueCatsAdDataTypeNewborn2        = 0x0A,
+    BCBlueCatsAdDataTypeManagement      = 0x1A,
+    BCBlueCatsAdDataTypeIdentifier      = 0x3A,
+    BCBlueCatsAdDataTypeMeasurement     = 0x5A,
 };
 
-/**
- *  These constants indicate the verification status of a BlueCats beacon.
- */
-typedef NS_ENUM(NSUInteger, BCVerificationStatus) {
-    /**
-     *  The beacon has not been verified.
-     */
-            BCVerificationStatusNotVerified = 0,
-    /**
-     *  The SDK has detected that the beacon is emulating a BlueCats beacon.
-     */
-            BCVerificationStatusDetectedAttack,
-    /**
-     *  The beacon has been verified by BlueCats iBeacon ads.
-     */
-            BCVerificationStatusVerifiedViaBlueCatsIBeaconAd,
-    /**
-     *  The beacon has been verified by BlueCats Secure ads.
-     */
-            BCVerificationStatusVerifiedViaBueCatsSecureAd
-};
+///**
+// *  These constants indicate the verification status of a BlueCats beacon.
+// */
+//typedef NS_ENUM(NSUInteger, BCVerificationStatus) {
+//    /**
+//     *  The beacon has not been verified.
+//     */
+//            BCVerificationStatusNotVerified = 0,
+//    /**
+//     *  The SDK has detected that the beacon is emulating a BlueCats beacon.
+//     */
+//            BCVerificationStatusDetectedAttack,
+//    /**
+//     *  The beacon has been verified by BlueCats iBeacon ads.
+//     */
+//            BCVerificationStatusVerifiedViaBlueCatsIBeaconAd,
+//    /**
+//     *  The beacon has been verified by BlueCats Secure ads.
+//     */
+//            BCVerificationStatusVerifiedViaBueCatsSecureAd
+//};
 
 /**
  *  These constants indicate the encoding type of block data.
@@ -237,6 +232,25 @@ typedef NS_ENUM(NSUInteger, BCBeaconAccessRole) {
             BCBeaconAccessRoleSettingsUpdater = 3
 };
 
+/**
+ * These constants indicate the type of sensor measurement data. Different types have different array sizes.
+ */
+typedef NS_ENUM(NSInteger, BCMeasurementType) {
+    BCMeasurementTypeNone = -0x01,
+    BCMeasurementTypeTempAny = 0x00,
+    BCMeasurementTypeAccelerometer = 0x01,
+    BCMeasurementTypeTilt = 0x02,
+    BCMeasurementTypeVoltage = 0x03,
+    BCMeasurementTypeUptime = 0x04,
+    BCMeasurementTypeTemp1Deg = 0x05,
+};
+
+typedef NS_ENUM(NSInteger, BCTiltAxis) {
+    BCTiltAxisX = 0,
+    BCTiltAxisY = 1,
+    BCTiltAxisZ = 2,
+};
+
 #pragma mark - BCZone
 
 /**
@@ -318,10 +332,6 @@ typedef NS_ENUM(NSInteger, BCSyncStatus) {
      */
             BCSyncStatusUnauthorized,
     /**
-     *  Basic access information has been synced.
-     */
-            BCSyncStatusAccessSynced,
-    /**
      *  Full data has been synced.
      */
             BCSyncStatusSynced,
@@ -335,20 +345,56 @@ typedef NS_ENUM(NSInteger, BCSyncStatus) {
             BCSyncStatusExpired
 };
 
+typedef enum {
+    BCBeaconOpcodeEraseBlock0 = 0x00,
+    BCBeaconOpcodeEraseBlock1 = 0x01,
+    BCBeaconOpcodeErasePointer = 0x02,
+    BCBeaconOpcodeGoDFU = 0x03,
+    BCBeaconOpcodePowerOn = 0x04,
+    BCBeaconOpcodeOTALast = 0x04,
+    BCBeaconOpcodeRestart = 0x0B, // Was 11, is not in firmware
+    BCBeaconOpcodeReset = 0x0C, // Was 12 is 0x0B in firmware
+    BCBeaconOpcodeEraseInternal = 0x0C,
+    BCBeaconOpcodeWriteVersionLine1 = 0x0D, // 13,
+    BCBeaconOpcodeWriteVersionLine2 = 0x0E, // 14,
+    BCBeaconOpcodeWriteVersionLine3 = 0x0F, // 15,
+    BCBeaconOpcodeWriteSettings1 = 0x0D,
+    BCBeaconOpcodeWriteSettings2 = 0x0E,
+    BCBeaconOpcodeWriteVer = 0x0F,
+    BCBeaconOpcodeGoSecureMode = 0x10, // 16
+    BCBeaconOpcodeGoIBeaconMode = 0x11, // 17
+    BCBeaconOpcodeGoIBeaconPlusSecureMode = 0x12, // 18
+    BCBeaconOpcodeRequestData = 0x13, // 19
+    BCBeaconOpcodeDataRequest = 0x13,
+    BCBeaconOpcodeResponseData = 0x14, // 20
+    BCBeaconOpcodeSecureSettignsInitializationVector = 0x15, // 21
+    BCBeaconOpcodeWriteIV = 0x15,
+    BCBeaconOpcodeSecureSettingsBulkData = 0x16, // 22
+    BCBeaconOpcodeWriteBulk = 0x16,
+    BCBeaconOpcodeSecureSettingsMAC = 0x17, // 23
+    BCBeaconOpcodeWriteMac = 0x17,
+    BCBeaconOpcodeSettingsBulk = 0x18, // 24
+    BCBeaconOpcodeWriteSettingsString = 0x18,
+    BCBeaconOpcodeSettingsBulkEnd = 0x19, // 25
+    BCBeaconOpcodeWriteSettingsStringLast = 0x19,
+    BCBeaconOpcodePrepareFutureSettingsUpdate = 0x1A,
+    BCBeaconOpcodePrepareOTA = 0x1B,
+    BCBeaconOpcodeOTAPrepare = 0x1B,
+    BCBeaconOpcodeGetUnencryptedStatus = 0x1C, // 28
+    BCBeaconOpcodeReadUnencryptedStatus = 0x1C,
+    BCBeaconOpcodeGetEncryptedStatus = 0x1D, // 29
+    BCBeaconOpcodeReadEncryptedStatus = 0x1D,
+    BCBeaconOpcodeBIMErase = 0x1E,
+    BCBeaconOpcodeOTAHeaderWrite = 0x1F,
+    BCBeaconOpcodeGetChallenge = 0x20,
+    BCBeaconOpcodeTestExtFlash = 0x21,
+    BCBeaconOpcodeIndicateMeasurementData = 0x22, // 33
+    BCBeaconOpcodeStartPWM = 0x23,
+    BCBeaconOpcodeStopPWM = 0x24,
+    
+    BCBeaconOpcodeExtended = 0x26,
+} BCBeaconOpcode;
 
-extern NSString *const BCFirmwareVersion002;
-extern NSString *const BCFirmwareVersion010;
-extern NSString *const BCFirmwareVersion011;
-extern NSString *const BCFirmwareVersion020;
-extern NSString *const BCFirmwareVersion030;
-extern NSString *const BCFirmwareVersion031;
-extern NSString *const BCFirmwareVersion040;
-extern NSString *const BCFirmwareVersion041;
-extern NSString *const BCFirmwareVersion050;
-extern NSString *const BCFirmwareVersion051;
-extern NSString *const BCFirmwareVersion052;
-extern NSString *const BCFirmwareVersion053;
-extern NSString *const BCFirmwareVersion060;
 
 extern NSString *const BCAdDataTypeKey;
 extern NSString *const BCAdDataTypeAppleIBeaconKey;
@@ -356,12 +402,14 @@ extern NSString *const BCAdDataTypeEddystoneTelKey;
 extern NSString *const BCAdDataTypeEddystoneURLKey;
 extern NSString *const BCAdDataTypeEddystoneUIDKey;
 extern NSString *const BCAdDataTypeEddystoneEIDKey;
-extern NSString *const BCAdDataTypeBlueCatsSphynxKey;
 extern NSString *const BCAdDataTypeBlueCatsIBeaconKey;
 extern NSString *const BCAdDataTypeBlueCatsSecureKey;
 extern NSString *const BCAdDataTypeBlueCatsBlockDataKey;
 extern NSString *const BCAdDataTypeBlueCatsNewbornKey;
 extern NSString *const BCAdDataTypeEncryptedStatusKey;
+extern NSString *const BCAdDataTypeBlueCatsMeasurementKey;
+extern NSString *const BCAdDataTypeBlueCatsIdentifierKey;
+extern NSString *const BCAdDataTypeBlueCatsManagementKey;
 
 extern NSString *const BCBlueCatsAdDataTypeKey;
 extern NSString *const BCAdDataLocalNameKey;
@@ -369,13 +417,12 @@ extern NSString *const BCAdDataTimestampKey;
 extern NSString *const BCAdDataFirstDiscoveredAtKey;
 extern NSString *const BCAdDataDiscoveredCountKey;
 extern NSString *const BCAdDataDiscoveredPerMinuteKey;
-extern NSString *const BCAdDataVersionKey;
+extern NSString *const BCAdDataSettingsVersionKey;
 extern NSString *const BCAdDataProximityUUIDStringKey;
 extern NSString *const BCAdDataBluetoothAddressStringKey;
 extern NSString *const BCAdDataMajorKey;
 extern NSString *const BCAdDataMinorKey;
-extern NSString *const BCAdDataFirmwareVersionKey;
-extern NSString *const BCAdDataModelNumberKey;
+extern NSString *const BCAdDataFirmwareUIDKey;
 extern NSString *const BCAdDataBatteryLevelKey;
 extern NSString *const BCAdDataTxPowerLevelKey;
 extern NSString *const BCAdDataMeasuredPowerAt1MeterKey;
@@ -387,11 +434,16 @@ extern NSString *const BCAdDataEddystoneUIDNameSpaceKey;
 extern NSString *const BCAdDataEddystoneURLSchemeKey;
 extern NSString *const BCAdDataEddystoneURLStringKey;
 extern NSString *const BCAdDataEddystoneEIDStringKey;
-extern NSString *const BCAdDataBatteryVoltageKey;
-extern NSString *const BCAdDataTempKey;
-extern NSString *const BCAdDataUptimeKey;
+extern NSString *const BCAdDataBatteryVoltageDataKey;
+extern NSString *const BCAdDataTempDataKey;
+extern NSString *const BCAdDataUptimeDataKey;
 extern NSString *const BCAdDataAdCountKey;
 extern NSString *const BCAdDataEncryptedStatusKey;
+extern NSString *const BCAdDataTeamIDKey;
+extern NSString *const BCAdDataAlertKey;
+extern NSString *const BCAdDataMeasurementDataKey;
+extern NSString *const BCAdDataIdentifierDataKey;
+
 
 extern NSString *const BCAdDataProcessorStaticIDKey;
 extern NSString *const BCAdDataProcessorDataKey;
@@ -425,6 +477,9 @@ extern NSString * const BCSettingsUpdateSecurityTypeKey;
 extern NSString * const BCSettingsUpdateAuthKeyKey;
 extern NSString * const BCSettingsUpdatePrivacyDurationKey;
 extern NSString * const BCSettingsUpdateBeaconRegionIDKey;
+extern NSString * const BCSettingsUpdateAdSchemaKey;
+extern NSString * const BCSettingsUpdateAdChannelsKey;
+extern NSString * const BCSettingsUpdateAdAndBurstTableSchemaKey;
 
 extern NSString *const BCEddyConfigDataSlotDictionaryKey;
 extern NSString *const BCEddyConfigAdvertisingIntervalKey;

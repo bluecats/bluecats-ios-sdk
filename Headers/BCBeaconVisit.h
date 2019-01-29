@@ -21,7 +21,7 @@
 ///Device SDK version.
 @property (nonatomic, copy) NSString *SDKVersion;
 ///Beacon firmware version.
-@property (nonatomic, copy) NSString *firmwareVersion;
+@property (nonatomic, copy) NSString *firmwareUID;
 ///Proximity UUID of the Beacon.
 @property (nonatomic, copy) NSString *proximityUUIDString;
 ///Bluetooth address of the beacon.  This is a spoofed value and changes
@@ -72,8 +72,8 @@
 @property (nonatomic, assign) BCProximity cProx;
 ///The ID of the closest proximity of the device to the beacon.
 @property (nonatomic, copy) NSNumber *cProxID;
-///The last verification status ID of the beacon during the visit.
-@property (nonatomic, copy) NSNumber *verificationStatusID;
+/////The last verification status ID of the beacon during the visit.
+//@property (nonatomic, copy) NSNumber *verificationStatusID;
 ///The date the beacon was last ranged.
 @property (nonatomic, copy) NSDate *lastRangedAt;
 ///The date a visit to beacon was last posted.
