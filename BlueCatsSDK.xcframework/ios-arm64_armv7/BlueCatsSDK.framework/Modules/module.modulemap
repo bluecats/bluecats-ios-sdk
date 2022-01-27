@@ -1,0 +1,6 @@
+framework module BlueCatsSDK {
+  umbrella header "BlueCatsSDK.h"
+
+  export *
+  module * { export * }
+}

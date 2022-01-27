@@ -26,4 +26,5 @@ extern NSInteger const BCBeaconModeIDUID;
 extern NSInteger const BCBeaconModeIDURL;
 extern NSInteger const BCBeaconModeIDNewborn;
 extern NSInteger const BCBeaconModeIDIBeaconPlusUID;
+extern NSInteger const BCBeaconModeIDCustom;
 

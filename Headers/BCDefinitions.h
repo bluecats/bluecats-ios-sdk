@@ -243,6 +243,9 @@ typedef NS_ENUM(NSInteger, BCMeasurementType) {
     BCMeasurementTypeVoltage = 0x03,
     BCMeasurementTypeUptime = 0x04,
     BCMeasurementTypeTemp1Deg = 0x05,
+    BCMeasurementTypeGPS = 0x09,
+    BCMeasurementTypeButton = 0x0A,
+    BCMeasurementTypeState = 0x0B,
 };
 
 typedef NS_ENUM(NSInteger, BCTiltAxis) {
